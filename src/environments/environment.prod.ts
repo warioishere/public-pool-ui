@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
-    API_URL: 'https://public-pool.io:40557',
-    STRATUM_URL: 'public-pool.io:21496'
+    API_URL: 'https://blitzpool.yourdevice.ch:3334',
+    STRATUM_URL: 'blitzpool.yourdevice.ch:3333'
 };

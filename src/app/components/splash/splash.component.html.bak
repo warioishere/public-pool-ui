@@ -13,35 +13,24 @@
                 <div class="col-12 text-center title">
                     <h1 class="text-900 font-normal">Blitz Pool by yourdevice.ch</h1>
                 </div>
+                <div class="mb-4">
+                    <a class="ml-4 mr-4" href="https://twitter.com/Public_Pool_BTC" target="_blank">
+                        <i class="pi pi-twitter" style="font-size: 30pt; color: white;"></i>
+                    </a>
+                    <a class="ml-4 mr-4" href="https://discord.gg/pF9smpe3yE" target="_blank">
+                        <i class="pi pi-discord" style="font-size: 30pt; color: white;"></i>
+                    </a>
+                    <a class="ml-4 mr-4" href="https://github.com/benjamin-wilson/public-pool" target="_blank">
+                        <i class="pi pi-github" style="font-size: 30pt; color: white;"></i>
+                    </a>
 
-		<div class="mb-4 text-center">
- 		 <!-- Telegram -->
-  		 <a class="ml-4 mr-4" href="https://t.me/blitzpool_official_switzerland" target="_blank" title="Telegram">
-    		   <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 24 24" fill="white">
-      		     <path d="M9.93 12.645 17.12 6.7q.3-.24.217-.45-.082-.21-.436-.13L5.4 9.55q-.41.11-.405.46.004.35.46.49l3.82 1.07 1.46 4.55q.12.36.36.405.24.045.45-.23l1.46-2.005 3.05 2.265q.26.17.48.057.22-.114.29-.44l1.68-7.91q.07-.32-.095-.472-.165-.151-.435-.05L4.8 10.025q-.45.135-.41.565.04.43.545.57l3.54 1.01Z"/>
-    		   </svg>
-  		 </a>
+                </div>
 
-  		<!-- Matrix -->
-  		 <a class="ml-4 mr-4" href="https://matrix.to/#/#blitzpool:matrix.yourdevice.ch" target="_blank" title="Matrix">
-    		   <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 100 100" fill="white">
-      		     <path d="M20 10a10 10 0 0 0-10 10v60a10 10 0 0 0 10 10h60a10 10 0 0 0 10-10V20a10 10 0 0 0-10-10H20Zm34 32a12 12 0 1 1-12 12 12 12 0 0 1 12-12Z"/>
-    		   </svg>
-  		 </a>
-
-  		<!-- GitHub -->
-  		 <a class="ml-4 mr-4" href="https://github.com/warioishere/blitzpool" target="_blank" title="GitHub">
-    		   <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 16 16" fill="white">
-      		     <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2 .37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.1 0 0 .67-.21 2.2.82a7.63 7.63 0 012.01-.27c.68 0 1.36.09 2.01.27 1.53-1.04 2.2-.82 2.2-.82.44 1.09.16 1.9.08 2.1.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.001 8.001 0 008 0z"/>
-    		   </svg>
-  		 </a>
-		</div>
-		
                 <div>
-                    <code>Welcome to the public soloming pool of yourdevice.ch! Together with Plebs from Switzerland, and anyone that would like to join, our goal is to hit a Block in Switzerland. Would you like to help us achive our mission? Join our Pool and help us dezentralize bitcoin mining even further. Together Strong! Together independent!</code>
+                    <code>Welcome to the public soloming pool of yourdevice.ch! Together with Plebs from Switzerland, and anyone that would like to join, our goal is to hit a Block in Switzerland. Would you like to help us achive our mission? Join our Pool and help us dezentralize bitcoin mining even further. Together Strong! Together independent!</code> 
                     <br>
-                    <br>
-                    <code>Running and maintaining such a server costs money and time. If you consider a donation for running this service: see donation button below!</code>
+		    <br>
+		    <code>Running and maintaining such a server costs money and time. If you consider a donation for running this service, LN-Addresse: <b>node-runner&#64;btcpay.yourdevice.ch</b> or onchain: <b>bc1qqe45lsuv6heau4f25c9kxlwz006g9dxe48fwsh</b></code>
                     <br>
                     <br>
                     <div class="info mb-2 p-4 border-dashed border-1 border-round">
@@ -59,9 +48,9 @@
                     <span>Join our Matrix Room: <a href="https://matrix.to/#/#blitzpool:matrix.yourdevice.ch" target="_blank">Blitzpool on Matrix</a></span>
                     <br>
                     <span>Or get notified via ntfy: <a href="https://ntfy.yourdevice.ch/uptime-blitzpool" target="_blank">Blitzpool Downtime Alerts</a></span>
-                    <br>
-                    <br>
-                    <span><b>We provide new blocktemplates every 30s!</b></span>
+		    <br>
+		    <br>
+		    <span><b>We provide new blocktemplates every 30s!</b></span>
                 </div>
 
 
@@ -101,7 +90,7 @@
                 <div class="text-center mb-2">Uptime: {{uptime$ | async | dateAgo}}</div>
 
                 <ng-container *ngIf="chartData$ | async as chartData; else loadingChart">
-
+                    
                     <p-chart [responsive]="true" type="line" [data]="chartData" [options]="chartOptions"></p-chart>
 
                 </ng-container>
@@ -223,6 +212,9 @@
             </div>
         </div>
 
+
+
+
         <div class="col-12" *ngIf="blockData$ | async as blockData">
             <div class="card">
                 <h4 style="text-align: center;"> Found Blocks</h4>
@@ -249,80 +241,24 @@
         </div>
 
         <div class="col-12">
-          <div class="card">
-            <div class="btcpay-form btcpay-form--block">
-            <h3 class="text-center">Donate</h3>
-            <p class="text-center">Like the project?<br>Consider a donation for maintaining the server:</p>
-
-            <form method="POST" action="https://btcpay.yourdevice.ch/api/v1/invoices">
-                <input type="hidden" name="storeId" value="Feh2badLurCkwuWK3VrEeUfzLsnxSW8uya3UwLFjbcYi" />
-                <input type="hidden" name="browserRedirect" value="https://yourdevice.ch/danke-schoen" />
-                <input type="hidden" name="notifyEmail" value="info@yourdevice.ch" />
-                <input type="hidden" name="defaultPaymentMethod" value="BTC-LN" />
-
-                <div class="btcpay-custom-container">
-                <div class="btcpay-custom">
-                    <button class="plus-minus" type="button" data-type="-" data-step="1" data-min="1" data-max="20">-</button>
-                    <input
-                    class="btcpay-input-price"
-                    type="number"
-                    name="price"
-                    min="1"
-                    max="20"
-                    step="1"
-                    value="5"
-                    data-price="5"
-                    style="width: 3em;" />
-                    <button class="plus-minus" type="button" data-type="+" data-step="1" data-min="1" data-max="20">+</button>
+            <div class="card">
+                <div class="grid">
+                    <div class="col-12 md:col-2">
+                        <h3>Donate</h3>
+                        <p>Like the project? Consider a donation to the developers:</p>
+                    </div>
+                    <div class="col-12 md:col-4 text-center">
+                        <img style="height: 200px;" src="assets/layout/images/qr-code-ln.svg"
+                            alt="bc1q99n3pu025yyu0jlywpmwzalyhm36tg5u37w20d">
+                        <div>public_pool&#64;strike.me</div>
+                    </div>
+                    <div class="col-12 md:col-6 text-center">
+                        <img style="height: 200px;" src="assets/layout/images/qr-code-onchain.svg"
+                            alt="bc1q99n3pu025yyu0jlywpmwzalyhm36tg5u37w20d">
+                        <div>bc1q99n3pu025yyu0jlywpmwzalyhm36tg5u37w20d</div>
+                    </div>
                 </div>
-
-                <div style="margin-top: 0.5rem; font-weight: bold;">
-                    <span>{{ selectedCurrency }}</span>
-                </div>
-
-                <select name="currency" [value]="selectedCurrency" (change)="onCurrencyChange($event)">
-                    <option value="CHF">CHF</option>
-                    <option value="USD">USD</option>
-                    <option value="GBP">GBP</option>
-                    <option value="EUR">EUR</option>
-                    <option value="BTC">BTC</option>
-                </select>
-                </div>
-
-                <div style="margin-top: 1rem;">
-                <input
-                    type="image"
-                    class="submit"
-                    name="submit"
-                    src="https://btcpay.yourdevice.ch/img/paybutton/pay.svg"
-                    style="width:209px"
-                    alt="Pay with BTCPay Server, a Self-Hosted Bitcoin Payment Processor" />
-                </div>
-            </form>
             </div>
-          </div>
         </div>
-
-
-        <div class="col-12">
-          <div class="card text-center p-3" style="background-color: #0e0e0e; color: #ccc; border-top: 1px solid #333; border-radius: 0; box-shadow: none;">
-            <div class="text-sm mb-2" style="opacity: 0.9; font-weight: bold;">
-              Blitzpool Version Info / Informationen zur aktuellen Version
-             </div>
-            <div class="commit-info" style="font-size: 0.75rem; white-space: pre-wrap; word-break: break-word; line-height: 1.4;">
-              {{ commitInfo }}
-            </div>
-            <div class="mt-3 text-sm" style="opacity: 0.6;">
-              Codebase:
-              <a href="https://github.com/warioishere/blitzpool" target="_blank" style="color: #ccc; text-decoration: underline;">
-                github.com/warioishere/blitzpool
-              </a>
-            </div>
-            <div class="text-xs mt-2" style="opacity: 0.4;">
-              This instance runs a custom fork of the public-pool project.
-            </div>
-          </div>
-        </div>
-
     </div>
 </div>

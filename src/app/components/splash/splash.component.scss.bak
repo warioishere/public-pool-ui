@@ -1,0 +1,76 @@
+#address {
+    min-width: 50%;
+}
+
+#logo {
+    left: 50%;
+    margin-left: -100px;
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: -18px;
+}
+
+.title {
+    margin-top: 65px;
+}
+
+.main {
+    margin-top: 60px;
+}
+
+.info {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.info code {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: inherit;
+}
+
+/* Desktop styles */
+@media screen and (min-width: 769px) {
+    .info {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .info code {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+
+/* Tablet and mobile styles */
+@media screen and (max-width: 768px) {
+    .info {
+        font-size: large;
+        padding: 0.5rem;
+    }
+
+    .info code {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-size: 0.9em;
+    }
+}
+
+/* Very small screens */
+@media screen and (max-width: 480px) {
+    .info {
+        font-size: medium;
+        padding: 0.25rem;
+    }
+}
+
+.card {
+    max-width: 1024px;
+    margin: 0 auto;
+
+}
+
+.pi-star-fill {
+    color: gold;
+}
