@@ -6,6 +6,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SplashComponent } from './components/splash/splash.component';
 import { WorkerGroupComponent } from './components/worker-group/worker-group.component';
 import { WorkerComponent } from './components/worker/worker.component';
+import { MiningHashrateGraphComponent } from './components/mining-hashrate-graph/mining-hashrate-graph.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
           {
             path: 'settings',
             component: SettingsComponent
+          },
+          {
+            path: 'hashrate',
+            component: MiningHashrateGraphComponent
           },
           {
             path: '',
