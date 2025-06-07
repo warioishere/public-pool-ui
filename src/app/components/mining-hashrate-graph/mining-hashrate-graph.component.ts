@@ -43,6 +43,7 @@ export class MiningHashrateGraphComponent implements OnInit {
           }
         },
         y: {
+          position: 'right',
           ticks: {
             color: textColorSecondary,
             callback: (value: number) => {
@@ -55,8 +56,9 @@ export class MiningHashrateGraphComponent implements OnInit {
           }
         },
         y1: {
-          position: 'right',
+          position: 'left',
           ticks: {
+            stepSize: 20 * 1e12,
             color: textColorSecondary,
             callback: (value: number) => {
               return (value / 1e12).toFixed(0) + ' T';
@@ -132,7 +134,6 @@ export class MiningHashrateGraphComponent implements OnInit {
             label: 'Current Hashrate',
             data: currentHashrate,
             fill: false,
-            borderDash: [5,5],
             borderColor: documentStyle.getPropertyValue('--red-500'),
             tension: 0,
             pointRadius: 0,
