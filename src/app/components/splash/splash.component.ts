@@ -240,15 +240,16 @@ export class SplashComponent implements OnInit, AfterViewInit {
   }
 
   fetchCommitInfo(): void {
-    this.http.get('/commit.txt', { responseType: 'text' }).subscribe({
-      next: (data) => {
-        this.commitInfo = data;
-        this.cdr.detectChanges();
-      },
-      error: () => {
-        this.commitInfo = 'Version info unavailable';
-        this.cdr.detectChanges();
-      }
-    });
-  }
+     const timestamp = Date.now();
+     this.http.get(`/commit.txt?t=${timestamp}`, { responseType: 'text' }).subscribe({
+       next: (data) => {
+         this.commitInfo = data;
+         this.cdr.detectChanges();
+       },
+       error: () => {
+         this.commitInfo = 'Version info unavailable';
+         this.cdr.detectChanges();
+       }
+     });
+   }
 }
