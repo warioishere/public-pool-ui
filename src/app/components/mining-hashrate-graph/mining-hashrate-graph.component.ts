@@ -85,7 +85,7 @@ export class MiningHashrateGraphComponent implements OnInit {
       const difficultyHistory = data.difficulty.sort((a: any, b: any) => a.timestamp - b.timestamp);
       difficultyHistory.push({ timestamp: Math.floor(labels[labels.length - 1].getTime() / 1000), difficulty: data.currentDifficulty });
       let diffIdx = 0;
-      const difficulty = labels.map(label => {
+      const difficulty = labels.map((label: Date) => {
         const ts = label.getTime() / 1000;
         while (diffIdx + 1 < difficultyHistory.length && ts >= difficultyHistory[diffIdx + 1].timestamp) {
           diffIdx++;
