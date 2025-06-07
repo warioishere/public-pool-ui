@@ -117,7 +117,7 @@ export class MiningHashrateGraphComponent implements OnInit {
             borderColor: documentStyle.getPropertyValue('--primary-color'),
             tension: .4,
             pointRadius: 1,
-            borderWidth: 1
+            borderWidth: 3
           },
           {
             label: 'Difficulty',
@@ -128,7 +128,7 @@ export class MiningHashrateGraphComponent implements OnInit {
             borderColor: documentStyle.getPropertyValue('--yellow-600'),
             tension: .4,
             pointRadius: 1,
-            borderWidth: 1
+            borderWidth: 3
           },
           {
             label: 'Current Hashrate',
