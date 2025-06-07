@@ -42,6 +42,7 @@ export class AppMenuComponent implements OnInit {
                     label: 'Dashboard',
                     items: [
                         { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: [params.address] },
+                        { label: 'Mining Hashrate Graph', icon: 'pi pi-chart-line', routerLink: [params.address, 'hashrate'] },
                         { label: 'Settings', icon: 'pi pi-fw pi-cog', routerLink: [params.address, 'settings'] }
                     ]
                 }
