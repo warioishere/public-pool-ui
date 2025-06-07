@@ -46,7 +46,7 @@ export class MiningHashrateGraphComponent implements OnInit {
           ticks: {
             color: textColorSecondary,
             callback: (value: number) => {
-              return (value / 1e12).toFixed(2) + ' TH';
+              return (value / 1e18).toFixed(2) + ' EH/s';
             }
           },
           grid: {
@@ -59,7 +59,7 @@ export class MiningHashrateGraphComponent implements OnInit {
           ticks: {
             color: textColorSecondary,
             callback: (value: number) => {
-              return (value / 1e12).toFixed(2) + ' TH';
+              return (value / 1e12).toFixed(0) + ' T';
             }
           },
           grid: {
@@ -82,8 +82,17 @@ export class MiningHashrateGraphComponent implements OnInit {
         return sum / slice.length;
       });
 
-      const difficultyHistory = data.difficulty.sort((a: any, b: any) => a.timestamp - b.timestamp);
-      difficultyHistory.push({ timestamp: Math.floor(labels[labels.length - 1].getTime() / 1000), difficulty: data.currentDifficulty });
+      const difficultyHistory = data.difficulty
+        .map((d: any) => ({
+          timestamp: d.timestamp ?? d.time,
+          difficulty: d.difficulty
+        }))
+        .sort((a: any, b: any) => a.timestamp - b.timestamp);
+
+      difficultyHistory.push({
+        timestamp: Math.floor(labels[labels.length - 1].getTime() / 1000),
+        difficulty: data.currentDifficulty
+      });
       let diffIdx = 0;
       const difficulty = labels.map((label: Date) => {
         const ts = label.getTime() / 1000;
@@ -124,7 +133,7 @@ export class MiningHashrateGraphComponent implements OnInit {
             data: currentHashrate,
             fill: false,
             borderDash: [5,5],
-            borderColor: documentStyle.getPropertyValue('--green-500'),
+            borderColor: documentStyle.getPropertyValue('--red-500'),
             tension: 0,
             pointRadius: 0,
             borderWidth: 1
