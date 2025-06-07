@@ -1,5 +1,30 @@
 <div class="card">
     <h5>Background Particles </h5>
-    <p-inputSwitch [(ngModel)]="value" (ngModelChange)="particlesChanged($event)" optionLabel="label"
+    <p-inputSwitch [(ngModel)]="particlesValue" (ngModelChange)="particlesChanged($event)" optionLabel="label"
+        optionValue="value"></p-inputSwitch>
+</div>
+<div class="card">
+    <h5>Your Best Difficulty Card</h5>
+    <p-inputSwitch [(ngModel)]="showBestDifficulty" (ngModelChange)="showBestDifficultyChanged($event)"
+        optionLabel="label" optionValue="value"></p-inputSwitch>
+</div>
+<div class="card">
+    <h5>Total Shares Card</h5>
+    <p-inputSwitch [(ngModel)]="showTotalShares" (ngModelChange)="showTotalSharesChanged($event)" optionLabel="label"
+        optionValue="value"></p-inputSwitch>
+</div>
+<div class="card">
+    <h5>Network Difficulty Card</h5>
+    <p-inputSwitch [(ngModel)]="showNetworkDifficulty" (ngModelChange)="showNetworkDifficultyChanged($event)" optionLabel="label"
+        optionValue="value"></p-inputSwitch>
+</div>
+<div class="card">
+    <h5>Network Hashrate Card</h5>
+    <p-inputSwitch [(ngModel)]="showNetworkHashrate" (ngModelChange)="showNetworkHashrateChanged($event)" optionLabel="label"
+        optionValue="value"></p-inputSwitch>
+</div>
+<div class="card">
+    <h5>Block Height Card</h5>
+    <p-inputSwitch [(ngModel)]="showBlockHeight" (ngModelChange)="showBlockHeightChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
 </div>

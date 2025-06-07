@@ -6,6 +6,7 @@ import { combineLatest, map, Observable, shareReplay } from 'rxjs';
 import { HashSuffixPipe } from '../../pipes/hash-suffix.pipe';
 import { AppService } from '../../services/app.service';
 import { ClientService } from '../../services/client.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 import { AverageTimeToBlockPipe } from 'src/app/pipes/average-time-to-block.pipe';
 
 
@@ -30,6 +31,12 @@ export class DashboardComponent implements AfterViewInit {
   public totalShares$: Observable<number>;
   public workerShares$: Observable<{ workerName: string, totalShares: number }[]>;
 
+  public showBestDifficulty$: Observable<boolean>;
+  public showTotalShares$: Observable<boolean>;
+  public showNetworkDifficulty$: Observable<boolean>;
+  public showNetworkHashrate$: Observable<boolean>;
+  public showBlockHeight$: Observable<boolean>;
+
   @ViewChild('dataTable') dataTable!: Table;
 
   public expandedRows$: Observable<any>;
@@ -39,7 +46,8 @@ export class DashboardComponent implements AfterViewInit {
   constructor(
     private clientService: ClientService,
     private route: ActivatedRoute,
-    private appService: AppService
+    private appService: AppService,
+    private localStorageService: LocalStorageService
   ) {
 
     this.networkInfo$ = this.appService.getNetworkInfo().pipe(
@@ -57,6 +65,12 @@ export class DashboardComponent implements AfterViewInit {
     this.workerShares$ = this.clientService.getWorkerShares(this.address).pipe(
       shareReplay({ refCount: true, bufferSize: 1 })
     );
+
+    this.showBestDifficulty$ = this.localStorageService.showBestDifficulty$;
+    this.showTotalShares$ = this.localStorageService.showTotalShares$;
+    this.showNetworkDifficulty$ = this.localStorageService.showNetworkDifficulty$;
+    this.showNetworkHashrate$ = this.localStorageService.showNetworkHashrate$;
+    this.showBlockHeight$ = this.localStorageService.showBlockHeight$;
 
     this.expandedRows$ = this.clientInfo$.pipe(map((info: any) => {
 

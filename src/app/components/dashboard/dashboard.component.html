@@ -1,6 +1,6 @@
 <ng-container>
     <div class="grid">
-        <div class="col-12 lg:col-6 xl:col-3">
+        <div class="col-12 lg:col-6 xl:col-3" *ngIf="showBestDifficulty$ | async">
 
             <div class="card mb-4">
                 <div class="flex justify-content-between mb-3">
@@ -36,7 +36,7 @@
 
         </div>
 
-        <div class="col-12 lg:col-6 xl:col-3">
+        <div class="col-12 lg:col-6 xl:col-3" *ngIf="showTotalShares$ | async">
             <div class="card mb-4">
                 <div class="flex justify-content-between mb-3">
                     <div>
@@ -59,7 +59,7 @@
         </div>
 
         <ng-container>
-            <div class="col-12 lg:col-6 xl:col-3">
+            <div class="col-12 lg:col-6 xl:col-3" *ngIf="showNetworkDifficulty$ | async">
                 <div class="card mb-4">
                     <div class="flex justify-content-between mb-3">
                         <div>
@@ -85,7 +85,7 @@
                     </span>
                 </div>
             </div>
-            <div class="col-12 lg:col-6 xl:col-3">
+            <div class="col-12 lg:col-6 xl:col-3" *ngIf="showNetworkHashrate$ | async">
                 <div class="card mb-4">
                     <div class="flex justify-content-between mb-3">
                         <div>
@@ -104,7 +104,7 @@
                     <span class="text-green-500 font-medium">&nbsp;</span>
                 </div>
             </div>
-            <div class="col-12 lg:col-6 xl:col-3">
+            <div class="col-12 lg:col-6 xl:col-3" *ngIf="showBlockHeight$ | async">
                 <div class="card mb-4">
                     <div class="flex justify-content-between mb-3">
                         <div>
