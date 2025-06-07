@@ -27,6 +27,9 @@ export class DashboardComponent implements AfterViewInit {
   public networkInfo$: Observable<any>;
   private networkInfo:any;
 
+  public totalShares$: Observable<number>;
+  public workerShares$: Observable<{ workerName: string, totalShares: number }[]>;
+
   @ViewChild('dataTable') dataTable!: Table;
 
   public expandedRows$: Observable<any>;
@@ -45,6 +48,13 @@ export class DashboardComponent implements AfterViewInit {
 
     this.address = this.route.snapshot.params['address'];
     this.clientInfo$ = this.clientService.getClientInfo(this.address).pipe(
+      shareReplay({ refCount: true, bufferSize: 1 })
+    );
+    this.totalShares$ = this.clientService.getTotalShares(this.address).pipe(
+      map((res: any) => res.totalShares),
+      shareReplay({ refCount: true, bufferSize: 1 })
+    );
+    this.workerShares$ = this.clientService.getWorkerShares(this.address).pipe(
       shareReplay({ refCount: true, bufferSize: 1 })
     );
 
@@ -176,9 +186,10 @@ export class DashboardComponent implements AfterViewInit {
 
   public getBestDifficulty(name: string, workers: any[]) {
     const workersByName = workers.filter(w => w.name == name);
-    const best = workersByName.reduce((pre, cur, idx, arr) => {
-      if (cur.bestDifficulty > pre) {
-        return cur.bestDifficulty;
+    const best = workersByName.reduce((pre, cur) => {
+      const curVal = Number(cur.bestDifficulty);
+      if (curVal > pre) {
+        return curVal;
       }
       return pre;
     }, 0);
@@ -193,5 +204,10 @@ export class DashboardComponent implements AfterViewInit {
       return pre += now - new Date(cur.startTime).getTime();
     }, 0);
     return new Date(now - sum);
+  }
+
+  public getWorkerShares(name: string, workerShares: { workerName: string, totalShares: number }[]) {
+    const item = workerShares.find(ws => ws.workerName === name);
+    return item ? item.totalShares : 0;
   }
 }

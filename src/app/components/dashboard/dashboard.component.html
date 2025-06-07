@@ -36,6 +36,28 @@
 
         </div>
 
+        <div class="col-12 lg:col-6 xl:col-3">
+            <div class="card mb-4">
+                <div class="flex justify-content-between mb-3">
+                    <div>
+                        <span class="block text-500 font-medium mb-3">Total Shares</span>
+                        <div class="text-900 font-medium text-xl">
+                            <ng-container *ngIf="totalShares$ | async as totalShares; else loading">
+                                {{totalShares | number}}
+                            </ng-container>
+                            <ng-template #loading>
+                                <p-skeleton></p-skeleton>
+                            </ng-template>
+                        </div>
+                    </div>
+                    <div class="flex align-items-center justify-content-center bg-green-100 border-round" [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-sort-numeric-up text-green-500 text-xl"></i>
+                    </div>
+                </div>
+                <span class="text-green-500 font-medium">&nbsp;</span>
+            </div>
+        </div>
+
         <ng-container>
             <div class="col-12 lg:col-6 xl:col-3">
                 <div class="card mb-4">
@@ -120,6 +142,7 @@
                         <th>Session ID</th>
                         <th>Hash Rate</th>
                         <th>Session Best Difficulty</th>
+                        <th>Total Shares</th>
                         <th>Uptime</th>
                         <th>Last Seen</th>
                     </tr>
@@ -146,6 +169,9 @@
                             {{getBestDifficulty(worker.name, clientInfo.workers) | numberSuffix}}
                         </td>
                         <td>
+                            <ng-container *ngIf="workerShares$ | async as workerShares">{{getWorkerShares(worker.name, workerShares) | number}}</ng-container>
+                        </td>
+                        <td>
 
                         </td>
                         <td></td>
@@ -159,6 +185,7 @@
                         <td>{{worker.sessionId}}</td>
                         <td>{{worker.hashRate | hashSuffix}}</td>
                         <td>{{worker.bestDifficulty | numberSuffix}}</td>
+                        <td></td>
                         <td>{{worker.startTime | dateAgo}}</td>
                         <td>{{worker.lastSeen | dateAgo}}</td>
                     </tr>
@@ -179,6 +206,7 @@
                         <th>Session ID</th>
                         <th>Hash Rate</th>
                         <th>Session Best Difficulty</th>
+                        <th>Total Shares</th>
                         <th>Uptime</th>
                         <th>Last Seen</th>
                     </tr>
@@ -200,6 +228,10 @@
                         </td>
                         <td>
                             <p-skeleton></p-skeleton>
+                        </td>
+                        <td>
+                            <p-skeleton></p-skeleton>
+                        </td>
                         <td>
                             <p-skeleton></p-skeleton>
                         </td>
@@ -214,6 +246,7 @@
                 <ng-template pTemplate="rowexpansion" let-worker>
                     <tr>
                         <td></td>
+                        <td><p-skeleton></p-skeleton></td>
                         <td><p-skeleton></p-skeleton></td>
                         <td><p-skeleton></p-skeleton></td>
                         <td><p-skeleton></p-skeleton></td>

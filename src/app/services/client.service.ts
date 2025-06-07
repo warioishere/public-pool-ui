@@ -19,4 +19,12 @@ export class ClientService {
   public getClientInfoChart(address: string) {
     return this.httpClient.get(`${environment.API_URL}/api/client/${address}/chart`) as Observable<any[]>;
   }
+
+  public getTotalShares(address: string) {
+    return this.httpClient.get(`${environment.API_URL}/api/client/${address}/shares`) as Observable<{ totalShares: number }>;
+  }
+
+  public getWorkerShares(address: string) {
+    return this.httpClient.get(`${environment.API_URL}/api/client/${address}/worker-shares`) as Observable<{ workerName: string, totalShares: number }[]>;
+  }
 }
