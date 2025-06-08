@@ -12,6 +12,7 @@ export class LocalStorageService {
   private SHOW_NETWORK_DIFFICULTY = 'SHOW_NETWORK_DIFFICULTY';
   private SHOW_NETWORK_HASHRATE = 'SHOW_NETWORK_HASHRATE';
   private SHOW_BLOCK_HEIGHT = 'SHOW_BLOCK_HEIGHT';
+  private BTC_ADDRESSES = 'BTC_ADDRESSES';
 
   private _particles$: BehaviorSubject<boolean>;
   public particles$: Observable<boolean>;
@@ -25,6 +26,8 @@ export class LocalStorageService {
   public showNetworkHashrate$: Observable<boolean>;
   private _showBlockHeight$: BehaviorSubject<boolean>;
   public showBlockHeight$: Observable<boolean>;
+  private _addresses$: BehaviorSubject<string[]>;
+  public addresses$: Observable<string[]>;
 
   constructor() {
     this._particles$ = new BehaviorSubject<boolean>(this.getParticles());
@@ -44,6 +47,9 @@ export class LocalStorageService {
 
     this._showBlockHeight$ = new BehaviorSubject<boolean>(this.getShowBlockHeight());
     this.showBlockHeight$ = this._showBlockHeight$.asObservable().pipe(shareReplay({ refCount: true, bufferSize: 1 }));
+
+    this._addresses$ = new BehaviorSubject<string[]>(this.getAddresses());
+    this.addresses$ = this._addresses$.asObservable().pipe(shareReplay({ refCount: true, bufferSize: 1 }));
   }
 
   private get(key: string): string | null {
@@ -118,6 +124,26 @@ export class LocalStorageService {
   public setShowBlockHeight(value: boolean) {
     this.set(this.SHOW_BLOCK_HEIGHT, JSON.stringify({ showBlockHeight: value }));
     this._showBlockHeight$.next(value);
+  }
+
+  public getAddresses(): string[] {
+    const result = this.get(this.BTC_ADDRESSES);
+    return result ? JSON.parse(result) : [];
+  }
+
+  public addAddress(address: string) {
+    const addresses = this.getAddresses();
+    if (!addresses.includes(address)) {
+      addresses.push(address);
+      this.set(this.BTC_ADDRESSES, JSON.stringify(addresses));
+      this._addresses$.next(addresses);
+    }
+  }
+
+  public removeAddress(address: string) {
+    const addresses = this.getAddresses().filter(a => a !== address);
+    this.set(this.BTC_ADDRESSES, JSON.stringify(addresses));
+    this._addresses$.next(addresses);
   }
 
 

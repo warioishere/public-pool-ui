@@ -28,3 +28,17 @@
     <p-inputSwitch [(ngModel)]="showBlockHeight" (ngModelChange)="showBlockHeightChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
 </div>
+
+<div class="card">
+    <h5>BTC Addresses</h5>
+    <div class="p-inputgroup mb-3">
+        <input [formControl]="newAddress" pInputText placeholder="New address" type="text">
+        <button pButton label="Add" (click)="addAddress()" [disabled]="newAddress.invalid"></button>
+    </div>
+    <ul class="list-none m-0 p-0">
+        <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-center justify-content-between">
+            <span class="mr-2">{{addr}}</span>
+            <button pButton type="button" label="Switch" (click)="switchAddress(addr)"></button>
+        </li>
+    </ul>
+</div>
