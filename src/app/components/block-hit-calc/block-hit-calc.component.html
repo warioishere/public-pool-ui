@@ -5,7 +5,7 @@
       <table class="w-full">
         <tr *ngFor="let p of probabilities">
           <td>{{p.period}}</td>
-          <td class="text-right">{{(p.probability * 100) | number : '1.2-2'}}%</td>
+          <td class="text-right">{{(p.probability * 100) | number : '1.8-8'}}%</td>
           <td class="text-right">1:{{ (1 / p.probability) | number : '1.0-0' }}</td>
         </tr>
       </table>
@@ -19,7 +19,7 @@
       <table class="w-full" *ngIf="customProbabilities.length">
         <tr *ngFor="let p of customProbabilities">
           <td>{{p.period}}</td>
-          <td class="text-right">{{(p.probability * 100) | number : '1.2-2'}}%</td>
+          <td class="text-right">{{(p.probability * 100) | number : '1.8-8'}}%</td>
           <td class="text-right">1:{{ (1 / p.probability) | number : '1.0-0' }}</td>
         </tr>
       </table>
