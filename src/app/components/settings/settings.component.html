@@ -5,17 +5,18 @@
         <button pButton label="Add" (click)="addAddress()" [disabled]="newAddress.invalid"></button>
     </div>
     <ul class="list-none m-0 p-0">
-        <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-start justify-content-between">
+        <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-center">
             <span class="mr-2" style="word-break: break-all;">{{addr}}</span>
-            <div class="flex flex-column align-items-end">
-                <ng-container *ngIf="addr === currentAddress; else switchBtn">
-                    <button pButton type="button" label="Current" class="p-button-success p-button-sm mb-2" disabled></button>
-                </ng-container>
-                <ng-template #switchBtn>
-                    <button pButton type="button" label="Switch" class="p-button-sm mb-2" (click)="switchAddress(addr)"></button>
-                    <button pButton type="button" icon="pi pi-times" class="p-button-text p-button-danger p-button-sm" (click)="removeAddress(addr)"></button>
-                </ng-template>
-            </div>
+            <ng-container *ngIf="addr === currentAddress; else switchBtn">
+                <button pButton type="button" label="Current" class="p-button-success p-button-sm mr-2" disabled></button>
+            </ng-container>
+            <ng-template #switchBtn>
+                <button pButton type="button" label="Switch" class="p-button-sm mr-2" (click)="switchAddress(addr)"></button>
+            </ng-template>
+            <span class="flex-grow-1"></span>
+            <ng-container *ngIf="addr !== currentAddress">
+                <button pButton type="button" icon="pi pi-times" class="p-button-text p-button-danger p-button-sm" (click)="removeAddress(addr)"></button>
+            </ng-container>
         </li>
     </ul>
 </div>
