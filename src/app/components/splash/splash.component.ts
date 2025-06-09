@@ -219,12 +219,17 @@ export class SplashComponent implements OnInit, AfterViewInit {
       return relevant.length ? relevant.reduce((s, v) => s + v.value, 0) / relevant.length : 0;
     };
 
+    const averageLast = (data: { value: number }[], count: number) => {
+      const slice = data.slice(-count);
+      return slice.length ? slice.reduce((s, v) => s + v.value, 0) / slice.length : 0;
+    };
+
     this.averageHashrates = [
       // For the most recent 10 min take the last reported value instead of
       // averaging a short interval which may contain no datapoints.
       { period: '10Min', value: d1[d1.length - 1]?.value ?? 0 },
-      { period: '30Min', value: averageSince(d1, 30 / 60) },
-      { period: '1HR', value: averageSince(d1, 1) },
+      { period: '30Min', value: averageLast(d1, 3) },
+      { period: '1HR', value: averageLast(d1, 6) },
       { period: '4HR', value: averageSince(d1, 4) },
       { period: '12HR', value: averageSince(d1, 12) },
       { period: '1D', value: averageSince(d1, 24) },
