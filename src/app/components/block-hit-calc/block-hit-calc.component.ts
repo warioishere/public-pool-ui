@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { AppService } from '../../services/app.service';
 import { ClientService } from '../../services/client.service';
 
@@ -9,15 +10,17 @@ import { ClientService } from '../../services/client.service';
   templateUrl: './block-hit-calc.component.html',
   styleUrls: ['./block-hit-calc.component.scss']
 })
-export class BlockHitCalcComponent implements OnInit {
+export class BlockHitCalcComponent implements OnInit, OnDestroy {
 
-  public avgHashrate14d: number = 0;
+  public avgHashrate1d: number = 0;
   public difficulty: number = 0;
 
   public customHashrate: number = 0; // TH/s
 
   public probabilities: { period: string, probability: number }[] = [];
   public customProbabilities: { period: string, probability: number }[] = [];
+
+  private destroy$ = new Subject<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -30,19 +33,23 @@ export class BlockHitCalcComponent implements OnInit {
     combineLatest([
       this.clientService.getClientInfoChart(address),
       this.appService.getNetworkInfo()
-    ]).subscribe(([chartData, networkInfo]) => {
-      const rawHashrate = chartData.map((d: any) => Number(d.data));
-      const avg14dHashrate = rawHashrate.map((_: any, idx: number, arr: number[]) => {
-        const start = Math.max(0, idx - 13);
-        const slice = arr.slice(start, idx + 1);
+    ])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([chartData, networkInfo]) => {
+        const rawHashrate = chartData.map((d: any) => Number(d.data));
+        const entriesPerDay = 24 * 6; // 10 minute samples
+        const slice = rawHashrate.slice(-entriesPerDay);
         const sum = slice.reduce((s, v) => s + v, 0);
-        return sum / slice.length;
+        this.avgHashrate1d = slice.length ? sum / slice.length : 0;
+        this.difficulty = networkInfo.difficulty;
+        this.probabilities = this.calculateProbabilities(this.avgHashrate1d);
+        this.updateCustomProbabilities();
       });
-      this.avgHashrate14d = avg14dHashrate[avg14dHashrate.length - 1];
-      this.difficulty = networkInfo.difficulty;
-      this.probabilities = this.calculateProbabilities(this.avgHashrate14d);
-      this.updateCustomProbabilities();
-    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public updateCustomProbabilities(): void {
