@@ -1,10 +1,10 @@
 # The Blitzpool UI project is an Angular application for viewing and controlling a Bitcoin mining pool. New additions include:
 
--BTC address management: Users can add multiple BTC addresses, switch between them, and remove them via the settings view
--New totalshares Count and Shares per worker fetched from a new Endpoint on our Blitzpool backend.
--Customizable UI options: Settings allow toggling background particles and the visibility of several dashboard cards (best difficulty, total shares, network difficulty, network hashrate, block height)
--Additional components and graphs: There are dedicated worker and worker-group pages, as well as a mining hashrate graph, all integrated through the routing module
--Splash page improvements: The landing page now presents current network statistics, donation capabilities through BTCPay, contact links, and displays running version information
+- BTC address management: Users can add multiple BTC addresses, switch between them, and remove them via the settings view
+- New totalshares Count and Shares per worker fetched from a new Endpoint on our Blitzpool backend.
+- Customizable UI options: Settings allow toggling background particles and the visibility of several dashboard cards (best difficulty, total shares, network difficulty, network hashrate, block height)
+- Additional components and graphs: There are dedicated worker and worker-group pages, as well as a mining hashrate graph, all integrated through the routing module
+- Splash page improvements: The landing page now presents current network statistics, donation capabilities through BTCPay, contact links, and displays running version information
 
 Overall, Blitzpool UI offers a customizable dashboard that tracks mining performance and provides user address management.
 
