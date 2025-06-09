@@ -8,8 +8,8 @@ import { MempoolService } from '../../services/mempool.service';
 })
 export class BlockHitCalcComponent implements OnInit {
 
-  public avgHashrate14d: number | null = null;
-  public difficulty: number | null = null;
+  public avgHashrate14d: number = 0;
+  public difficulty: number = 0;
 
   public customHashrate: number = 0; // H/s
 
@@ -35,7 +35,7 @@ export class BlockHitCalcComponent implements OnInit {
   }
 
   public updateCustomProbabilities(): void {
-    if (this.customHashrate > 0 && this.difficulty) {
+    if (this.customHashrate > 0 && this.difficulty > 0) {
       this.customProbabilities = this.calculateProbabilities(this.customHashrate);
     } else {
       this.customProbabilities = [];
