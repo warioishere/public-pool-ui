@@ -1,4 +1,27 @@
 <div class="card">
+    <h5>BTC Addresses</h5>
+    <div class="p-inputgroup mb-3">
+        <input [formControl]="newAddress" pInputText placeholder="New address" type="text">
+        <button pButton label="Add" (click)="addAddress()" [disabled]="newAddress.invalid"></button>
+    </div>
+    <ul class="list-none m-0 p-0">
+        <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-center">
+            <div class="flex flex-grow-1 align-items-center">
+                <span style="word-break: break-all;">{{addr}}</span>
+                <button *ngIf="addr !== currentAddress" pButton type="button" icon="pi pi-times" class="p-button-text p-button-danger p-button-sm ml-2" (click)="removeAddress(addr)"></button>
+            </div>
+            <div class="ml-2 flex flex-column align-items-end">
+                <ng-container *ngIf="addr === currentAddress; else switchBtn">
+                    <button pButton type="button" label="Current" class="p-button-success p-button-sm mb-1" disabled></button>
+                </ng-container>
+                <ng-template #switchBtn>
+                    <button pButton type="button" label="Switch" class="p-button-sm mb-1" (click)="switchAddress(addr)"></button>
+                </ng-template>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="card">
     <h5>Background Particles </h5>
     <p-inputSwitch [(ngModel)]="particlesValue" (ngModelChange)="particlesChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
@@ -28,3 +51,4 @@
     <p-inputSwitch [(ngModel)]="showBlockHeight" (ngModelChange)="showBlockHeightChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
 </div>
+
