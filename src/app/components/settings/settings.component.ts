@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { Observable, map } from 'rxjs';
 
 import { LocalStorageService } from '../../services/local-storage.service';
 import { bitcoinAddressValidator } from '../../validators/bitcoin-address.validator';
@@ -21,7 +22,7 @@ export class SettingsComponent {
   public showNetworkHashrate: boolean = true;
   public showBlockHeight: boolean = true;
 
-  public addresses$!: any;
+  public addresses$!: Observable<string[]>;
   public newAddress!: FormControl;
   public currentAddress!: string;
 
@@ -36,12 +37,19 @@ export class SettingsComponent {
     this.showNetworkDifficulty = this.localStorageService.getShowNetworkDifficulty();
     this.showNetworkHashrate = this.localStorageService.getShowNetworkHashrate();
     this.showBlockHeight = this.localStorageService.getShowBlockHeight();
-    this.addresses$ = this.localStorageService.addresses$;
-    this.newAddress = new FormControl('', bitcoinAddressValidator());
     this.currentAddress = this.route.parent?.snapshot.params['address'];
     if (this.currentAddress) {
       this.localStorageService.addAddress(this.currentAddress);
     }
+    this.addresses$ = this.localStorageService.addresses$.pipe(
+      map(addrs => {
+        if (!this.currentAddress) {
+          return addrs;
+        }
+        return [this.currentAddress, ...addrs.filter(a => a !== this.currentAddress)];
+      })
+    );
+    this.newAddress = new FormControl('', bitcoinAddressValidator());
   }
 
   public particlesChanged(newVal: boolean) {
@@ -83,5 +91,9 @@ export class SettingsComponent {
 
   public switchAddress(address: string) {
     this.router.navigate(['app', address]);
+  }
+
+  public removeAddress(address: string) {
+    this.localStorageService.removeAddress(address);
   }
 }

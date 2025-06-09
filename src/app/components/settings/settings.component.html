@@ -8,10 +8,13 @@
         <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-center justify-content-between">
             <span class="mr-2">{{addr}}</span>
             <ng-container *ngIf="addr === currentAddress; else switchBtn">
-                <span class="font-bold">Current</span>
+                <button pButton type="button" label="Current" styleClass="p-button-success p-button-sm" disabled></button>
             </ng-container>
             <ng-template #switchBtn>
-                <button pButton type="button" label="Switch" (click)="switchAddress(addr)"></button>
+                <div class="flex align-items-center">
+                    <button pButton type="button" label="Switch" class="mr-2" (click)="switchAddress(addr)"></button>
+                    <button pButton type="button" icon="pi pi-times" class="p-button-text p-button-danger p-button-sm" (click)="removeAddress(addr)"></button>
+                </div>
             </ng-template>
         </li>
     </ul>
