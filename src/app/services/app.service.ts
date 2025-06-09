@@ -19,7 +19,12 @@ export class AppService {
     public getNetworkInfo() {
         return this.httpClient.get(`${environment.API_URL}/api/network`) as Observable<any>;
     }
-    public getInfoChart(range?: '1d' | '1m' | '6m' | '12m') {
+    /**
+     * Fetch hashrate chart data.
+     * Without a range, the API provides the last 24h of data.
+     * Use range '1m' to get 1 month of data for long term averages.
+     */
+    public getInfoChart(range?: '1d' | '1m') {
         let url = `${environment.API_URL}/api/info/chart`;
         if (range) {
             url += `?range=${range}`;
