@@ -99,6 +99,11 @@
             <div class="card chart">
 
                 <div class="text-center mb-2">Uptime: {{uptime$ | async | dateAgo}}</div>
+                <div class="text-center mb-2">
+                    <ng-container *ngFor="let avg of averageHashrates; let last = last">
+                        <b>{{avg.period}}:</b> {{avg.value | hashSuffix}}<span *ngIf="!last"> | </span>
+                    </ng-container>
+                </div>
 
                 <ng-container *ngIf="chartData$ | async as chartData; else loadingChart">
 

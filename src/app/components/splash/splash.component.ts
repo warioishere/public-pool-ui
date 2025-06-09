@@ -40,6 +40,8 @@ export class SplashComponent implements OnInit, AfterViewInit {
 
   public selectedCurrency: string = 'CHF';
 
+  public averageHashrates: { period: string; value: number }[] = [];
+
   onCurrencyChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     this.selectedCurrency = target.value;
@@ -67,6 +69,7 @@ export class SplashComponent implements OnInit, AfterViewInit {
     this.chartData$ = combineLatest([this.appService.getInfoChart(), this.appService.getNetworkInfo()]).pipe(
       map(([chartData, networkInfo]) => {
         this.networkInfo = networkInfo;
+        this.calculateAverageHashrates(chartData);
         const documentStyle = getComputedStyle(document.documentElement);
         return {
           labels: chartData.map((d: any) => d.label),
@@ -196,6 +199,26 @@ export class SplashComponent implements OnInit, AfterViewInit {
       });
       submitImage.setAttribute('data-initialized', 'true');
     }
+  }
+
+  private calculateAverageHashrates(chartData: any[]): void {
+    const parseTime = (label: any) => new Date(label).getTime();
+    const data = chartData.map((d: any) => ({ time: parseTime(d.label), value: Number(d.data) }));
+    const now = Date.now();
+    const periods = [
+      { period: '4h', hours: 4 },
+      { period: '1d', hours: 24 },
+      { period: '14d', hours: 14 * 24 },
+      { period: '1m', hours: 30 * 24 },
+      { period: '6m', hours: 180 * 24 },
+      { period: '12m', hours: 365 * 24 }
+    ];
+    this.averageHashrates = periods.map(p => {
+      const start = now - p.hours * 3600 * 1000;
+      const relevant = data.filter(v => v.time >= start);
+      const avg = relevant.length ? relevant.reduce((s, v) => s + v.value, 0) / relevant.length : 0;
+      return { period: p.period, value: avg };
+    });
   }
 
   async fetchPoolStats() {
