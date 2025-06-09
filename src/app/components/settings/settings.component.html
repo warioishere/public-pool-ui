@@ -38,7 +38,12 @@
     <ul class="list-none m-0 p-0">
         <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-center justify-content-between">
             <span class="mr-2">{{addr}}</span>
-            <button pButton type="button" label="Switch" (click)="switchAddress(addr)"></button>
+            <ng-container *ngIf="addr === currentAddress; else switchBtn">
+                <span class="font-bold">Current</span>
+            </ng-container>
+            <ng-template #switchBtn>
+                <button pButton type="button" label="Switch" (click)="switchAddress(addr)"></button>
+            </ng-template>
         </li>
     </ul>
 </div>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
 import { LocalStorageService } from '../../services/local-storage.service';
@@ -23,8 +23,13 @@ export class SettingsComponent {
 
   public addresses$!: any;
   public newAddress!: FormControl;
+  public currentAddress!: string;
 
-  constructor(private localStorageService: LocalStorageService, private router: Router) {
+  constructor(
+    private localStorageService: LocalStorageService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.particlesValue = this.localStorageService.getParticles();
     this.showBestDifficulty = this.localStorageService.getShowBestDifficulty();
     this.showTotalShares = this.localStorageService.getShowTotalShares();
@@ -33,6 +38,10 @@ export class SettingsComponent {
     this.showBlockHeight = this.localStorageService.getShowBlockHeight();
     this.addresses$ = this.localStorageService.addresses$;
     this.newAddress = new FormControl('', bitcoinAddressValidator());
+    this.currentAddress = this.route.parent?.snapshot.params['address'];
+    if (this.currentAddress) {
+      this.localStorageService.addAddress(this.currentAddress);
+    }
   }
 
   public particlesChanged(newVal: boolean) {
