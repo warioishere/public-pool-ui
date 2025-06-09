@@ -1,4 +1,22 @@
 <div class="card">
+    <h5>BTC Addresses</h5>
+    <div class="p-inputgroup mb-3">
+        <input [formControl]="newAddress" pInputText placeholder="New address" type="text">
+        <button pButton label="Add" (click)="addAddress()" [disabled]="newAddress.invalid"></button>
+    </div>
+    <ul class="list-none m-0 p-0">
+        <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-center justify-content-between">
+            <span class="mr-2">{{addr}}</span>
+            <ng-container *ngIf="addr === currentAddress; else switchBtn">
+                <span class="font-bold">Current</span>
+            </ng-container>
+            <ng-template #switchBtn>
+                <button pButton type="button" label="Switch" (click)="switchAddress(addr)"></button>
+            </ng-template>
+        </li>
+    </ul>
+</div>
+<div class="card">
     <h5>Background Particles </h5>
     <p-inputSwitch [(ngModel)]="particlesValue" (ngModelChange)="particlesChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
@@ -29,21 +47,3 @@
         optionValue="value"></p-inputSwitch>
 </div>
 
-<div class="card">
-    <h5>BTC Addresses</h5>
-    <div class="p-inputgroup mb-3">
-        <input [formControl]="newAddress" pInputText placeholder="New address" type="text">
-        <button pButton label="Add" (click)="addAddress()" [disabled]="newAddress.invalid"></button>
-    </div>
-    <ul class="list-none m-0 p-0">
-        <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-center justify-content-between">
-            <span class="mr-2">{{addr}}</span>
-            <ng-container *ngIf="addr === currentAddress; else switchBtn">
-                <span class="font-bold">Current</span>
-            </ng-container>
-            <ng-template #switchBtn>
-                <button pButton type="button" label="Switch" (click)="switchAddress(addr)"></button>
-            </ng-template>
-        </li>
-    </ul>
-</div>
