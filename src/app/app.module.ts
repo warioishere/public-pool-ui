@@ -17,6 +17,7 @@ import { UserAgentLinkComponent } from './components/user-agent-link/user-agent-
 import { WorkerGroupComponent } from './components/worker-group/worker-group.component';
 import { WorkerComponent } from './components/worker/worker.component';
 import { MiningHashrateGraphComponent } from './components/mining-hashrate-graph/mining-hashrate-graph.component';
+import { BlockHitCalcComponent } from './components/block-hit-calc/block-hit-calc.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { HashSuffixPipe } from './pipes/hash-suffix.pipe';
@@ -38,7 +39,8 @@ import { AverageTimeToBlockPipe } from './pipes/average-time-to-block.pipe';
     HashSuffixPipe,
     SettingsComponent,
     UserAgentLinkComponent,
-    MiningHashrateGraphComponent
+    MiningHashrateGraphComponent,
+    BlockHitCalcComponent
   ],
   imports: [
     CommonModule,
