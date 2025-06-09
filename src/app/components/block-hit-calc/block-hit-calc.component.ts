@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MempoolService } from '../../services/mempool.service';
+import { ActivatedRoute } from '@angular/router';
+import { combineLatest } from 'rxjs';
+import { AppService } from '../../services/app.service';
+import { ClientService } from '../../services/client.service';
 
 @Component({
   selector: 'app-block-hit-calc',
@@ -11,16 +14,24 @@ export class BlockHitCalcComponent implements OnInit {
   public avgHashrate14d: number = 0;
   public difficulty: number = 0;
 
-  public customHashrate: number = 0; // H/s
+  public customHashrate: number = 0; // TH/s
 
   public probabilities: { period: string, probability: number }[] = [];
   public customProbabilities: { period: string, probability: number }[] = [];
 
-  constructor(private mempoolService: MempoolService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private clientService: ClientService,
+    private appService: AppService
+  ) { }
 
   ngOnInit(): void {
-    this.mempoolService.getHashrateData('1y').subscribe((data: any) => {
-      const rawHashrate = data.hashrates.map((h: any) => h.avgHashrate);
+    const address = this.route.snapshot.params['address'];
+    combineLatest([
+      this.clientService.getClientInfoChart(address),
+      this.appService.getNetworkInfo()
+    ]).subscribe(([chartData, networkInfo]) => {
+      const rawHashrate = chartData.map((d: any) => Number(d.data));
       const avg14dHashrate = rawHashrate.map((_: any, idx: number, arr: number[]) => {
         const start = Math.max(0, idx - 13);
         const slice = arr.slice(start, idx + 1);
@@ -28,7 +39,7 @@ export class BlockHitCalcComponent implements OnInit {
         return sum / slice.length;
       });
       this.avgHashrate14d = avg14dHashrate[avg14dHashrate.length - 1];
-      this.difficulty = data.currentDifficulty;
+      this.difficulty = networkInfo.difficulty;
       this.probabilities = this.calculateProbabilities(this.avgHashrate14d);
       this.updateCustomProbabilities();
     });
@@ -36,7 +47,8 @@ export class BlockHitCalcComponent implements OnInit {
 
   public updateCustomProbabilities(): void {
     if (this.customHashrate > 0 && this.difficulty > 0) {
-      this.customProbabilities = this.calculateProbabilities(this.customHashrate);
+      // convert TH/s to H/s
+      this.customProbabilities = this.calculateProbabilities(this.customHashrate * 1e12);
     } else {
       this.customProbabilities = [];
     }

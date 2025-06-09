@@ -14,7 +14,8 @@
   <div class="col-12 lg:col-6">
     <div class="card">
       <h5>Custom Hashrate</h5>
-      <input type="number" class="p-inputtext w-full mb-3" [(ngModel)]="customHashrate" (ngModelChange)="updateCustomProbabilities()" placeholder="Hashrate (H/s)" />
+      <p class="mb-2">Enter hashrate in <strong>TH/s</strong>:</p>
+      <input type="number" class="p-inputtext w-full mb-3" [(ngModel)]="customHashrate" (ngModelChange)="updateCustomProbabilities()" placeholder="Hashrate (TH/s)" />
       <table class="w-full" *ngIf="customProbabilities.length">
         <tr *ngFor="let p of customProbabilities">
           <td>{{p.period}}</td>
