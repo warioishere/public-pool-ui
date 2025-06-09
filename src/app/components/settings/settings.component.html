@@ -6,15 +6,17 @@
     </div>
     <ul class="list-none m-0 p-0">
         <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-center">
-            <span class="flex-grow-1 mr-2" style="word-break: break-all;">{{addr}}</span>
-            <div class="ml-auto flex flex-column align-items-end">
+            <div class="flex flex-grow-1 align-items-center">
+                <span style="word-break: break-all;">{{addr}}</span>
+                <button *ngIf="addr !== currentAddress" pButton type="button" icon="pi pi-times" class="p-button-text p-button-danger p-button-sm ml-2" (click)="removeAddress(addr)"></button>
+            </div>
+            <div class="ml-2 flex flex-column align-items-end">
                 <ng-container *ngIf="addr === currentAddress; else switchBtn">
                     <button pButton type="button" label="Current" class="p-button-success p-button-sm mb-1" disabled></button>
                 </ng-container>
                 <ng-template #switchBtn>
                     <button pButton type="button" label="Switch" class="p-button-sm mb-1" (click)="switchAddress(addr)"></button>
                 </ng-template>
-                <button *ngIf="addr !== currentAddress" pButton type="button" icon="pi pi-times" class="p-button-text p-button-danger p-button-sm" (click)="removeAddress(addr)"></button>
             </div>
         </li>
     </ul>
