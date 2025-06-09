@@ -88,11 +88,23 @@
                <h4 style="text-align: center;">Current Mining Network Stats</h4>
                <div class="text-center">
                   <p><strong>Current Network Difficulty:</strong> <span>  {{ currentDifficulty }}</span>T</p>
-                  <p><strong>Current Hashrate:</strong> <span>  {{ currentHashrate }}</span>TH/sec</p>
+                  <p><strong>Current Hashrate:</strong> <span>  {{ currentHashrate | hashSuffix }}</span></p>
                   <p><strong>Difficulty Change:</strong> <span> {{ difficultyChange }}</span>%</p>
                   <p><strong>Days Until Adjustment:</strong> <span> {{ estimatedDaysUntilAdjustment }}</span> days</p>
                </div>
            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card mb-3">
+                <h4 style="text-align: center;">Average Pool Hashrate</h4>
+                <div class="average-hashrate-container">
+                    <div class="average-hashrate-box" *ngFor="let avg of averageHashrates">
+                        <div class="font-medium">{{avg.period}}</div>
+                        <div class="value">{{avg.value | hashSuffix}}</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="col-12">

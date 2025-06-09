@@ -29,7 +29,7 @@ export class SplashComponent implements OnInit, AfterViewInit {
   public stratumURL = '';
 
   public currentDifficulty: string = 'Lade...';
-  public currentHashrate: string = 'Lade...';
+  public currentHashrate: number | string = 'Lade...';
   public difficultyChange: string = 'Lade...';
   public estimatedDaysUntilAdjustment: string = 'Lade...';
 
@@ -39,6 +39,8 @@ export class SplashComponent implements OnInit, AfterViewInit {
   private networkInfo: any;
 
   public selectedCurrency: string = 'CHF';
+
+  public averageHashrates: { period: string; value: number }[] = [];
 
   onCurrencyChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
@@ -64,16 +66,23 @@ export class SplashComponent implements OnInit, AfterViewInit {
     this.highScores$ = this.info$.pipe(map(info => info.highScores));
     this.uptime$ = this.info$.pipe(map(info => info.uptime));
 
-    this.chartData$ = combineLatest([this.appService.getInfoChart(), this.appService.getNetworkInfo()]).pipe(
-      map(([chartData, networkInfo]) => {
+    this.chartData$ = combineLatest([
+      this.appService.getInfoChart(),
+      this.appService.getInfoChart('1m'),
+      this.appService.getInfoChart('6m'),
+      this.appService.getInfoChart('12m'),
+      this.appService.getNetworkInfo()
+    ]).pipe(
+      map(([data1d, data1m, data6m, data12m, networkInfo]) => {
         this.networkInfo = networkInfo;
+        this.calculateAverageHashrates(data1d, data1m, data6m, data12m);
         const documentStyle = getComputedStyle(document.documentElement);
         return {
-          labels: chartData.map((d: any) => d.label),
+          labels: data1d.map((d: any) => d.label),
           datasets: [
             {
               label: 'Public-Pool Hashrate',
-              data: chartData.map((d: any) => d.data),
+              data: data1d.map((d: any) => d.data),
               fill: false,
               backgroundColor: documentStyle.getPropertyValue('--primary-color'),
               borderColor: documentStyle.getPropertyValue('--primary-color'),
@@ -198,6 +207,32 @@ export class SplashComponent implements OnInit, AfterViewInit {
     }
   }
 
+  private calculateAverageHashrates(data1d: any[], data1m: any[], data6m: any[], data12m: any[]): void {
+    const parseData = (arr: any[]) => arr.map(d => ({ time: new Date(d.label).getTime(), value: Number(d.data) }));
+
+    const d1 = parseData(data1d);
+    const d1m = parseData(data1m);
+    const d6m = parseData(data6m);
+    const d12m = parseData(data12m);
+
+    const now = Date.now();
+
+    const averageSince = (data: { time: number; value: number }[], hours: number) => {
+      const start = now - hours * 3600 * 1000;
+      const relevant = data.filter(v => v.time >= start);
+      return relevant.length ? relevant.reduce((s, v) => s + v.value, 0) / relevant.length : 0;
+    };
+
+    this.averageHashrates = [
+      { period: '4h', value: averageSince(d1, 4) },
+      { period: '1d', value: averageSince(d1, 24) },
+      { period: '14d', value: averageSince(d1m, 14 * 24) },
+      { period: '1m', value: averageSince(d1m, 30 * 24) },
+      { period: '6m', value: averageSince(d6m, 180 * 24) },
+      { period: '12m', value: averageSince(d12m, 365 * 24) }
+    ];
+  }
+
   async fetchPoolStats() {
     try {
       const response = await fetch("https://mempool.space/api/v1/mining/hashrate/3d");
@@ -205,7 +240,7 @@ export class SplashComponent implements OnInit, AfterViewInit {
 
       this.ngZone.run(() => {
         this.currentDifficulty = (data.currentDifficulty / 1e12).toFixed(2);
-        this.currentHashrate = (data.currentHashrate / 1e12).toFixed(2);
+        this.currentHashrate = data.currentHashrate;
       });
 
     } catch (error) {
