@@ -69,13 +69,11 @@ export class SplashComponent implements OnInit, AfterViewInit {
     this.chartData$ = combineLatest([
       this.appService.getInfoChart(),
       this.appService.getInfoChart('1m'),
-      this.appService.getInfoChart('6m'),
-      this.appService.getInfoChart('12m'),
       this.appService.getNetworkInfo()
     ]).pipe(
-      map(([data1d, data1m, data6m, data12m, networkInfo]) => {
+      map(([data1d, data1m, networkInfo]) => {
         this.networkInfo = networkInfo;
-        this.calculateAverageHashrates(data1d, data1m, data6m, data12m);
+        this.calculateAverageHashrates(data1d, data1m);
         const documentStyle = getComputedStyle(document.documentElement);
         return {
           labels: data1d.map((d: any) => d.label),
@@ -207,13 +205,11 @@ export class SplashComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private calculateAverageHashrates(data1d: any[], data1m: any[], data6m: any[], data12m: any[]): void {
+  private calculateAverageHashrates(data1d: any[], data1m: any[]): void {
     const parseData = (arr: any[]) => arr.map(d => ({ time: new Date(d.label).getTime(), value: Number(d.data) }));
 
     const d1 = parseData(data1d);
     const d1m = parseData(data1m);
-    const d6m = parseData(data6m);
-    const d12m = parseData(data12m);
 
     const now = Date.now();
 
@@ -223,13 +219,22 @@ export class SplashComponent implements OnInit, AfterViewInit {
       return relevant.length ? relevant.reduce((s, v) => s + v.value, 0) / relevant.length : 0;
     };
 
+    const averageLast = (data: { value: number }[], count: number) => {
+      const slice = data.slice(-count);
+      return slice.length ? slice.reduce((s, v) => s + v.value, 0) / slice.length : 0;
+    };
+
     this.averageHashrates = [
-      { period: '4h', value: averageSince(d1, 4) },
-      { period: '1d', value: averageSince(d1, 24) },
-      { period: '14d', value: averageSince(d1m, 14 * 24) },
-      { period: '1m', value: averageSince(d1m, 30 * 24) },
-      { period: '6m', value: averageSince(d6m, 180 * 24) },
-      { period: '12m', value: averageSince(d12m, 365 * 24) }
+      // For the most recent 10 min take the last reported value instead of
+      // averaging a short interval which may contain no datapoints.
+      { period: '10Min', value: d1[d1.length - 1]?.value ?? 0 },
+      { period: '30Min', value: averageLast(d1, 3) },
+      { period: '1HR', value: averageLast(d1, 6) },
+      { period: '4HR', value: averageSince(d1, 4) },
+      { period: '12HR', value: averageSince(d1, 12) },
+      { period: '1D', value: averageSince(d1, 24) },
+      { period: '14D', value: averageSince(d1m, 14 * 24) },
+      { period: '1M', value: averageSince(d1m, 30 * 24) }
     ];
   }
 
