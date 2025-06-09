@@ -7,6 +7,7 @@ import { SplashComponent } from './components/splash/splash.component';
 import { WorkerGroupComponent } from './components/worker-group/worker-group.component';
 import { WorkerComponent } from './components/worker/worker.component';
 import { MiningHashrateGraphComponent } from './components/mining-hashrate-graph/mining-hashrate-graph.component';
+import { BlockHitCalcComponent } from './components/block-hit-calc/block-hit-calc.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 
 const routes: Routes = [
@@ -28,6 +29,10 @@ const routes: Routes = [
           {
             path: 'hashrate',
             component: MiningHashrateGraphComponent
+          },
+          {
+            path: 'block-hit-calc',
+            component: BlockHitCalcComponent
           },
           {
             path: '',

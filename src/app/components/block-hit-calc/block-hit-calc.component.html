@@ -1,0 +1,25 @@
+<div class="grid" *ngIf="avgHashrate14d && difficulty">
+  <div class="col-12 lg:col-6">
+    <div class="card">
+      <h5>Block Hit Chance (14d Avg Hashrate)</h5>
+      <table class="w-full">
+        <tr *ngFor="let p of probabilities">
+          <td>{{p.period}}</td>
+          <td class="text-right">{{(p.probability * 100) | number : '1.2-2'}}%</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="col-12 lg:col-6">
+    <div class="card">
+      <h5>Custom Hashrate</h5>
+      <input type="number" class="p-inputtext w-full mb-3" [(ngModel)]="customHashrate" (ngModelChange)="updateCustomProbabilities()" placeholder="Hashrate (H/s)" />
+      <table class="w-full" *ngIf="customProbabilities.length">
+        <tr *ngFor="let p of customProbabilities">
+          <td>{{p.period}}</td>
+          <td class="text-right">{{(p.probability * 100) | number : '1.2-2'}}%</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
