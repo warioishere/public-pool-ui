@@ -1,7 +1,7 @@
-<div class="grid" *ngIf="avgHashrate14d > 0 && difficulty > 0">
+<div class="grid" *ngIf="avgHashrate1d > 0 && difficulty > 0">
   <div class="col-12 lg:col-6">
     <div class="card">
-      <h5>Block Hit Chance (14d Avg Hashrate)</h5>
+      <h5>Block Hit Chance (1d Avg Hashrate)</h5>
       <table class="w-full">
         <tr *ngFor="let p of probabilities">
           <td>{{p.period}}</td>
