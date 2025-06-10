@@ -67,20 +67,24 @@ export class SplashComponent implements OnInit, AfterViewInit {
     this.uptime$ = this.info$.pipe(map(info => info.uptime));
 
     this.chartData$ = combineLatest([
-      this.appService.getInfoChart(),
       this.appService.getInfoChart('1m'),
       this.appService.getNetworkInfo()
     ]).pipe(
-      map(([data1d, data1m, networkInfo]) => {
+      map(([data1m, networkInfo]) => {
         this.networkInfo = networkInfo;
-        this.calculateAverageHashrates(data1d, data1m);
+
+        const entriesPerDay = 24 * 6; // 10 minute samples
+        const last7d = data1m.slice(-7 * entriesPerDay);
+
+        this.calculateAverageHashrates(last7d, data1m);
+
         const documentStyle = getComputedStyle(document.documentElement);
         return {
-          labels: data1d.map((d: any) => d.label),
+          labels: last7d.map((d: any) => d.label),
           datasets: [
             {
               label: 'Public-Pool Hashrate',
-              data: data1d.map((d: any) => d.data),
+              data: last7d.map((d: any) => d.data),
               fill: false,
               backgroundColor: documentStyle.getPropertyValue('--primary-color'),
               borderColor: documentStyle.getPropertyValue('--primary-color'),
