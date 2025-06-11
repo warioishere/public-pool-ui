@@ -38,7 +38,7 @@ export class CurrentBlockRewardComponent implements OnInit {
       const nextRes = await fetch('https://mempool.space/api/v1/fees/mempool-blocks');
       const nextData = await nextRes.json();
       const first = Array.isArray(nextData) ? nextData[0] : nextData;
-      const estimated = 3125000000 + (first.totalFees ?? 0);
+      const estimated = 312500000 + (first.totalFees ?? 0);
       this.ngZone.run(() => {
         this.blockHeight = last.avgHeight ?? last.height ?? 'N/A';
         this.avgRewards = rewards;
