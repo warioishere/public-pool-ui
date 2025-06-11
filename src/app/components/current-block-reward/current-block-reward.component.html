@@ -1,7 +1,15 @@
 <div class="grid justify-content-center">
   <div class="col-12 md:col-6">
     <div class="card text-center">
-      <h4>Current Blockreward</h4>
+      <h4>Estimated Next Blockreward</h4>
+      <p><strong>Estimate:</strong> <span>{{ estimatedReward }}</span> sats</p>
+      <p><strong>BTC Price:</strong> ${{ priceUSD }} / €{{ priceEUR }} / CHF {{ priceCHF }}</p>
+      <p><strong>Reward Value:</strong> ${{ estRewardUSD | number:'1.2-2' }} / €{{ estRewardEUR | number:'1.2-2' }} / CHF {{ estRewardCHF | number:'1.2-2' }}</p>
+    </div>
+  </div>
+  <div class="col-12 md:col-6">
+    <div class="card text-center">
+      <h4>Last Block Reward</h4>
       <p><strong>Block Height:</strong> <span>{{ blockHeight }}</span></p>
       <p><strong>Block Reward:</strong> <span>{{ avgRewards }}</span> sats</p>
       <p><strong>BTC Price:</strong> ${{ priceUSD }} / €{{ priceEUR }} / CHF {{ priceCHF }}</p>
