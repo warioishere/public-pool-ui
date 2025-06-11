@@ -19,6 +19,7 @@ import { WorkerComponent } from './components/worker/worker.component';
 import { MiningHashrateGraphComponent } from './components/mining-hashrate-graph/mining-hashrate-graph.component';
 import { BlockHitCalcComponent } from './components/block-hit-calc/block-hit-calc.component';
 import { DifficultyAdjustmentComponent } from './components/difficulty-adjustment/difficulty-adjustment.component';
+import { CurrentBlockRewardComponent } from './components/current-block-reward/current-block-reward.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { HashSuffixPipe } from './pipes/hash-suffix.pipe';
@@ -42,7 +43,8 @@ import { AverageTimeToBlockPipe } from './pipes/average-time-to-block.pipe';
     UserAgentLinkComponent,
     MiningHashrateGraphComponent,
     BlockHitCalcComponent,
-    DifficultyAdjustmentComponent
+    DifficultyAdjustmentComponent,
+    CurrentBlockRewardComponent
   ],
   imports: [
     CommonModule,
