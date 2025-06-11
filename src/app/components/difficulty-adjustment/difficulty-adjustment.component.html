@@ -1,0 +1,11 @@
+<div class="grid justify-content-center">
+  <div class="col-12 md:col-6">
+    <div class="card text-center">
+      <h4>Next Difficulty Adjustment</h4>
+      <p><strong>Current Network Difficulty:</strong> <span>{{ currentDifficulty }}</span>T</p>
+      <p><strong>Current Hashrate:</strong> <span>{{ currentHashrate | hashSuffix }}</span></p>
+      <p><strong>Difficulty Change:</strong> <span>{{ difficultyChange }}</span>%</p>
+      <p><strong>Days Until Adjustment:</strong> <span>{{ estimatedDaysUntilAdjustment }}</span> days</p>
+    </div>
+  </div>
+</div>
