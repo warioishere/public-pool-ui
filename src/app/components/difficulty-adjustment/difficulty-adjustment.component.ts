@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, NgZone, OnInit } from '@angular/core';
+import { HalvingService } from '../../services/halving.service';
 
 @Component({
   selector: 'app-difficulty-adjustment',
@@ -11,12 +12,19 @@ export class DifficultyAdjustmentComponent implements OnInit {
   public currentHashrate: number | string = 'Loading...';
   public difficultyChange: string = 'Loading...';
   public estimatedDaysUntilAdjustment: string = 'Loading...';
+  public halvingBlocksRemaining: number | string = 'Loading...';
+  public halvingEta: string = 'Loading...';
 
-  constructor(private ngZone: NgZone, private cdr: ChangeDetectorRef) { }
+  constructor(
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef,
+    private halvingService: HalvingService
+  ) { }
 
   ngOnInit(): void {
     this.fetchPoolStats();
     this.fetchDifficultyAdjustment();
+    this.fetchHalvingEstimate();
   }
 
   async fetchPoolStats() {
@@ -51,6 +59,23 @@ export class DifficultyAdjustmentComponent implements OnInit {
       this.ngZone.run(() => {
         this.difficultyChange = 'Error';
         this.estimatedDaysUntilAdjustment = 'Error';
+      });
+    }
+    this.cdr.detectChanges();
+  }
+
+  async fetchHalvingEstimate() {
+    try {
+      const data = await this.halvingService.getHalvingEstimate();
+      this.ngZone.run(() => {
+        this.halvingBlocksRemaining = data.blocksRemaining;
+        this.halvingEta = data.eta;
+      });
+    } catch (error) {
+      console.error('Error fetching halving estimate:', error);
+      this.ngZone.run(() => {
+        this.halvingBlocksRemaining = 'Error';
+        this.halvingEta = 'Error';
       });
     }
     this.cdr.detectChanges();
