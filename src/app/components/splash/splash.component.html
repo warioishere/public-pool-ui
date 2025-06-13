@@ -1,5 +1,10 @@
 <div class="py-4 px-1 md:px4 lg:px-8 mx-0 lg:mx-8 main">
     <div class="grid justify-content-center">
+        <div class="col-12 text-right mb-2">
+            <button pButton
+                    [label]="(translation.language$ | async) === 'en' ? 'Deutsch' : 'English'"
+                    (click)="translation.toggleLanguage()"></button>
+        </div>
 
         <div class="col-12">
 
@@ -38,42 +43,42 @@
 		</div>
 		
                 <div>
-                    <code>Welcome to the public solomining pool of yourdevice.ch! Together with Plebs from Switzerland, and anyone that would like to join, our goal is to hit a Block in Switzerland. Would you like to help us achive our mission? Join our Pool and help us dezentralize bitcoin mining even further. Together Strong! Together independent!</code>
+                    <code>{{'home_intro_welcome' | translate}}</code>
                     <br>
                     <br>
-                    <code>Running and maintaining such a server costs money and a lot of time. If you consider a donation for running this service, see donation button below!</code>
+                    <code>{{'home_intro_donate' | translate}}</code>
                     <br>
                     <br>
                     <div class="info mb-2 p-4 border-dashed border-1 border-round">
                         <code>stratum+tcp://{{stratumURL}}</code>
                         <br>
-                        <code>login for your statistics: &lt;your BTC address&gt;</code>
+                        <code>{{'home_login_statistics' | translate}}</code>
                     </div>
-                    <span><b>Open Source Solo Mining Pool from Switzerland</b></span>
+                    <span><b>{{'home_open_source_pool' | translate}}</b></span>
                     <br>
-                    <span>no fees / keine Geb&uuml;hren</span>
-                    <br>
-                    <br>
-                    <span>Join our Telegram group: <a href="https://t.me/+KXoFgjUWCUM5ZmI0" target="_blank">Blitzpool on Telegram</a></span>
-                    <br>
-                    <span>Join our Matrix Room: <a href="https://matrix.to/#/#blitzpool:matrix.yourdevice.ch" target="_blank">Blitzpool on Matrix</a></span>
-                    <br>
-                    <span>Or get notified via ntfy: <a href="https://ntfy.yourdevice.ch/uptime-blitzpool" target="_blank">Blitzpool Downtime Alerts</a></span>
+                    <span>{{'home_no_fees' | translate}}</span>
                     <br>
                     <br>
-                    <span><b>We provide new blocktemplates every 30s!</b></span>
+                    <span>{{'home_join_telegram' | translate}} <a href="https://t.me/+KXoFgjUWCUM5ZmI0" target="_blank">Blitzpool on Telegram</a></span>
+                    <br>
+                    <span>{{'home_join_matrix' | translate}} <a href="https://matrix.to/#/#blitzpool:matrix.yourdevice.ch" target="_blank">Blitzpool on Matrix</a></span>
+                    <br>
+                    <span>{{'home_ntfy_alerts' | translate}} <a href="https://ntfy.yourdevice.ch/uptime-blitzpool" target="_blank">Blitzpool Downtime Alerts</a></span>
+                    <br>
+                    <br>
+                    <span><b>{{'home_blocktemplates' | translate}}</b></span>
                 </div>
             </div>
         </div>
 
         <div class="col-12">
             <div class="card">
-                <h4>Login</h4>
+                <h4>{{'login_title' | translate}}</h4>
                 <div class="field text-center">
 
-                    <input [formControl]="address" placeholder="Address (bc1...)" pInputText id="address" type="text"
+                    <input [formControl]="address" [placeholder]="('address_placeholder' | translate)" pInputText id="address" type="text"
                         class="p-inputtext p-component p-element">
-                    <button [disabled]="address.invalid" class="ml-3 mt-3" pButton label="My Workers"
+                    <button [disabled]="address.invalid" class="ml-3 mt-3" pButton [label]="('my_workers' | translate)"
                         [routerLink]="['app',address.value]"></button>
                 </div>
             </div>
@@ -81,19 +86,19 @@
 
         <div class="col-12">
            <div class="card">
-               <h4 style="text-align: center;">Current Mining Network Stats</h4>
+               <h4 style="text-align: center;">{{'current_network_stats' | translate}}</h4>
                <div class="text-center">
-                  <p><strong>Current Network Difficulty:</strong> <span>  {{ currentDifficulty }}</span>T</p>
-                  <p><strong>Current Hashrate:</strong> <span>  {{ currentHashrate | hashSuffix }}</span></p>
-                  <p><strong>Difficulty Change:</strong> <span> {{ difficultyChange }}</span>%</p>
-                  <p><strong>Days Until Adjustment:</strong> <span> {{ estimatedDaysUntilAdjustment }}</span> days</p>
+                  <p><strong>{{'current_network_difficulty' | translate}}</strong> <span>  {{ currentDifficulty }}</span>T</p>
+                  <p><strong>{{'current_hashrate' | translate}}</strong> <span>  {{ currentHashrate | hashSuffix }}</span></p>
+                  <p><strong>{{'difficulty_change' | translate}}</strong> <span> {{ difficultyChange }}</span>%</p>
+                  <p><strong>{{'days_until_adjustment' | translate}}</strong> <span> {{ estimatedDaysUntilAdjustment }}</span> days</p>
                </div>
            </div>
         </div>
 
         <div class="col-12">
             <div class="card mb-3">
-                <h4 style="text-align: center;">Average Pool Hashrate</h4>
+                <h4 style="text-align: center;">{{'average_pool_hashrate' | translate}}</h4>
                 <div class="average-hashrate-container">
                     <div class="average-hashrate-box" *ngFor="let avg of averageHashrates">
                         <div class="font-medium">{{avg.period}}</div>
@@ -106,7 +111,7 @@
         <div class="col-12">
             <div class="card chart">
 
-                <div class="text-center mb-2">Uptime: {{uptime$ | async | dateAgo}}</div>
+                <div class="text-center mb-2">{{'uptime' | translate}}: {{uptime$ | async | dateAgo}}</div>
 
                 <ng-container *ngIf="chartData$ | async as chartData; else loadingChart">
 
@@ -122,15 +127,15 @@
 
         <div class="col-12">
             <div class="card">
-                <h4 style="text-align: center;">Online Devices</h4>
+                <h4 style="text-align: center;">{{'online_devices' | translate}}</h4>
                 <ng-container *ngIf="userAgents$ | async as userAgents">
                     <p-table [value]="userAgents">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>Device</th>
-                                <th>Currently Working</th>
-                                <th>Total Hash Rate</th>
-                                <th>Best Difficulty <i class="pi pi-question-circle ml-2"
+                                <th>{{'device' | translate}}</th>
+                                <th>{{'currently_working' | translate}}</th>
+                                <th>{{'total_hash_rate' | translate}}</th>
+                                <th>{{'best_difficulty' | translate}} <i class="pi pi-question-circle ml-2"
                                         pTooltip="If you find a solution with a difficulty higher than the network difficulty, you've found a block."></i>
                                 </th>
                             </tr>
@@ -177,15 +182,15 @@
 
         <div class="col-12" *ngIf="highScores$ | async as highScores">
             <div class="card">
-                <h4 style="text-align: center;">High Scores</h4>
+                <h4 style="text-align: center;">{{'high_scores' | translate}}</h4>
                 <ng-container>
                     <p-table [value]="highScores">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>Rank</th>
-                                <th>Difficulty</th>
-                                <th>Device</th>
-                                <th>When</th>
+                                <th>{{'rank' | translate}}</th>
+                                <th>{{'difficulty' | translate}}</th>
+                                <th>{{'device' | translate}}</th>
+                                <th>{{'when' | translate}}</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-highScore let-i="rowIndex">
@@ -232,14 +237,14 @@
 
         <div class="col-12" *ngIf="blockData$ | async as blockData">
             <div class="card">
-                <h4 style="text-align: center;"> Found Blocks</h4>
+                <h4 style="text-align: center;">{{'found_blocks' | translate}}</h4>
                 <p-table [value]="blockData">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Height</th>
-                            <th>Address</th>
-                            <th>Worker</th>
-                            <th>Session</th>
+                            <th>{{'height' | translate}}</th>
+                            <th>{{'address' | translate}}</th>
+                            <th>{{'worker' | translate}}</th>
+                            <th>{{'session' | translate}}</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-block>

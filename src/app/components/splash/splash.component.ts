@@ -8,6 +8,7 @@ import { HashSuffixPipe } from '../../pipes/hash-suffix.pipe';
 import { AppService } from '../../services/app.service';
 import { bitcoinAddressValidator } from '../../validators/bitcoin-address.validator';
 import { AverageTimeToBlockPipe } from 'src/app/pipes/average-time-to-block.pipe';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-splash',
@@ -51,7 +52,8 @@ export class SplashComponent implements OnInit, AfterViewInit {
     private appService: AppService,
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone,
-    private http: HttpClient
+    private http: HttpClient,
+    public translation: TranslationService
   ) {
     this.info$ = this.appService.getInfo().pipe(shareReplay({ refCount: true, bufferSize: 1 }));
 

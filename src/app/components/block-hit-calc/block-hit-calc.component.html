@@ -1,10 +1,10 @@
 <div class="grid" *ngIf="avgHashrate1d > 0 && difficulty > 0">
   <div class="col-12 lg:col-6">
     <div class="card">
-      <h5>Block Hit Chance (1d Avg Hashrate)</h5>
+      <h5>{{'block_hit_chance' | translate}}</h5>
       <table class="w-full">
         <tr *ngFor="let p of probabilities">
-          <td>{{p.period}}</td>
+          <td>{{p.period | translate}}</td>
           <td class="text-right">{{(p.probability * 100) | number : '1.8-8'}}%</td>
           <td class="text-right">1:{{ (1 / p.probability) | number : '1.0-0' }}</td>
         </tr>
@@ -13,12 +13,12 @@
   </div>
   <div class="col-12 lg:col-6">
     <div class="card">
-      <h5>Custom Hashrate</h5>
-      <p class="mb-2">Enter hashrate in <strong>TH/s</strong>:</p>
-      <input type="number" class="p-inputtext w-full mb-3" [(ngModel)]="customHashrate" (ngModelChange)="updateCustomProbabilities()" placeholder="Hashrate (TH/s)" />
+      <h5>{{'custom_hashrate' | translate}}</h5>
+      <p class="mb-2">{{'enter_hashrate' | translate}} <strong>TH/s</strong>:</p>
+      <input type="number" class="p-inputtext w-full mb-3" [(ngModel)]="customHashrate" (ngModelChange)="updateCustomProbabilities()" [placeholder]="('hashrate_placeholder' | translate)" />
       <table class="w-full" *ngIf="customProbabilities.length">
         <tr *ngFor="let p of customProbabilities">
-          <td>{{p.period}}</td>
+          <td>{{p.period | translate}}</td>
           <td class="text-right">{{(p.probability * 100) | number : '1.8-8'}}%</td>
           <td class="text-right">1:{{ (1 / p.probability) | number : '1.0-0' }}</td>
         </tr>
