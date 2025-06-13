@@ -8,6 +8,7 @@ import { AppService } from '../../services/app.service';
 import { ClientService } from '../../services/client.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { AverageTimeToBlockPipe } from 'src/app/pipes/average-time-to-block.pipe';
+import { TranslationService } from '../../services/translation.service';
 
 
 
@@ -47,7 +48,8 @@ export class DashboardComponent implements AfterViewInit {
     private clientService: ClientService,
     private route: ActivatedRoute,
     private appService: AppService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    public translation: TranslationService
   ) {
 
     this.networkInfo$ = this.appService.getNetworkInfo().pipe(

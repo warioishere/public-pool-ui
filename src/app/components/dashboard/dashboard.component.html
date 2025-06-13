@@ -1,11 +1,14 @@
 <ng-container>
     <div class="grid">
+        <div class="col-12 text-right mb-2">
+            <button pButton label="Deutsch" (click)="translation.setLanguage('de')"></button>
+        </div>
         <div class="col-12 lg:col-6 xl:col-3" *ngIf="showBestDifficulty$ | async">
 
             <div class="card mb-4">
                 <div class="flex justify-content-between mb-3">
                     <div>
-                        <span class="block text-500 font-medium mb-3">Your Best Difficulty <i
+                        <span class="block text-500 font-medium mb-3">{{'your_best_difficulty' | translate}} <i
                                 class="pi pi-question-circle ml-2"
                                 pTooltip="If you find a solution with a difficulty higher than the network difficulty, you've found a block."></i></span>
                         <div class="text-900 font-medium text-xl">
@@ -40,7 +43,7 @@
             <div class="card mb-4">
                 <div class="flex justify-content-between mb-3">
                     <div>
-                        <span class="block text-500 font-medium mb-3">Total Shares</span>
+                        <span class="block text-500 font-medium mb-3">{{'total_shares' | translate}}</span>
                         <div class="text-900 font-medium text-xl">
                             <ng-container *ngIf="totalShares$ | async as totalShares; else loading">
                                 {{totalShares | number}}
@@ -63,7 +66,7 @@
                 <div class="card mb-4">
                     <div class="flex justify-content-between mb-3">
                         <div>
-                            <span class="block text-500 font-medium mb-3">Network Difficulty</span>
+                            <span class="block text-500 font-medium mb-3">{{'network_difficulty' | translate}}</span>
                             <div class="text-900 font-medium text-xl">
                                 <ng-container
                                     *ngIf="networkInfo$ | async as networkInfo; else loading">{{networkInfo.difficulty |
@@ -89,7 +92,7 @@
                 <div class="card mb-4">
                     <div class="flex justify-content-between mb-3">
                         <div>
-                            <span class="block text-500 font-medium mb-3">Network Hash Rate </span>
+                            <span class="block text-500 font-medium mb-3">{{'network_hash_rate' | translate}} </span>
                             <div class="text-900 font-medium text-xl">
                                 <ng-container *ngIf="networkInfo$ | async as networkInfo; else loading">
                                     {{networkInfo.networkhashps | hashSuffix}}</ng-container>
@@ -108,7 +111,7 @@
                 <div class="card mb-4">
                     <div class="flex justify-content-between mb-3">
                         <div>
-                            <span class="block text-500 font-medium mb-3">Block Height</span>
+                            <span class="block text-500 font-medium mb-3">{{'block_height' | translate}}</span>
                             <div class="text-900 font-medium text-xl">
                                 <ng-container *ngIf="networkInfo$ | async as networkInfo; else loading">
                                     {{networkInfo.blocks}}</ng-container>
@@ -120,7 +123,7 @@
                         <i class="pi pi-star text-orange-500 text-xl"></i>
                     </div> -->
                     </div>
-                    <span class="text-green-500 font-medium">Weight:
+                    <span class="text-green-500 font-medium">{{'weight' | translate}}
                         <ng-container *ngIf="networkInfo$ | async as networkInfo; else loading">
                             {{networkInfo.currentblockweight | number}}</ng-container>
                         <ng-template #loading><p-skeleton></p-skeleton></ng-template>
@@ -138,13 +141,13 @@
 
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Name</th>
-                        <th>Session ID</th>
-                        <th>Hash Rate</th>
-                        <th>Session Best Difficulty</th>
-                        <th>Total Shares</th>
-                        <th>Uptime</th>
-                        <th>Last Seen</th>
+                        <th>{{'worker' | translate}}</th>
+                        <th>{{'session' | translate}} ID</th>
+                        <th>{{'total_hash_rate' | translate}}</th>
+                        <th>{{'best_difficulty' | translate}}</th>
+                        <th>{{'total_shares' | translate}}</th>
+                        <th>{{'uptime' | translate}}</th>
+                        <th>{{'last_seen' | translate}}</th>
                     </tr>
                 </ng-template>
 
@@ -202,13 +205,13 @@
 
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Name</th>
-                        <th>Session ID</th>
-                        <th>Hash Rate</th>
-                        <th>Session Best Difficulty</th>
-                        <th>Total Shares</th>
-                        <th>Uptime</th>
-                        <th>Last Seen</th>
+                        <th>{{'worker' | translate}}</th>
+                        <th>{{'session' | translate}} ID</th>
+                        <th>{{'total_hash_rate' | translate}}</th>
+                        <th>{{'best_difficulty' | translate}}</th>
+                        <th>{{'total_shares' | translate}}</th>
+                        <th>{{'uptime' | translate}}</th>
+                        <th>{{'last_seen' | translate}}</th>
                     </tr>
                 </ng-template>
 
