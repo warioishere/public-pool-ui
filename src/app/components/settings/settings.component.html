@@ -1,8 +1,8 @@
 <div class="card">
-    <h5>BTC Addresses</h5>
+    <h5>{{'btc_addresses' | translate}}</h5>
     <div class="p-inputgroup mb-3">
-        <input [formControl]="newAddress" pInputText placeholder="New address" type="text">
-        <button pButton label="Add" (click)="addAddress()" [disabled]="newAddress.invalid"></button>
+        <input [formControl]="newAddress" pInputText [placeholder]="('new_address' | translate)" type="text">
+        <button pButton [label]="('add_btn' | translate)" (click)="addAddress()" [disabled]="newAddress.invalid"></button>
     </div>
     <ul class="list-none m-0 p-0">
         <li *ngFor="let addr of addresses$ | async" class="mb-2 flex align-items-center">
@@ -12,42 +12,42 @@
             </div>
             <div class="ml-2 flex flex-column align-items-end">
                 <ng-container *ngIf="addr === currentAddress; else switchBtn">
-                    <button pButton type="button" label="Current" class="p-button-success p-button-sm mb-1" disabled></button>
+                    <button pButton type="button" [label]="('current_btn' | translate)" class="p-button-success p-button-sm mb-1" disabled></button>
                 </ng-container>
                 <ng-template #switchBtn>
-                    <button pButton type="button" label="Switch" class="p-button-sm mb-1" (click)="switchAddress(addr)"></button>
+                    <button pButton type="button" [label]="('switch_btn' | translate)" class="p-button-sm mb-1" (click)="switchAddress(addr)"></button>
                 </ng-template>
             </div>
         </li>
     </ul>
 </div>
 <div class="card">
-    <h5>Background Particles </h5>
+    <h5>{{'background_particles' | translate}} </h5>
     <p-inputSwitch [(ngModel)]="particlesValue" (ngModelChange)="particlesChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
 </div>
 <div class="card">
-    <h5>Your Best Difficulty Card</h5>
+    <h5>{{'your_best_difficulty_card' | translate}}</h5>
     <p-inputSwitch [(ngModel)]="showBestDifficulty" (ngModelChange)="showBestDifficultyChanged($event)"
         optionLabel="label" optionValue="value"></p-inputSwitch>
 </div>
 <div class="card">
-    <h5>Total Shares Card</h5>
+    <h5>{{'total_shares_card' | translate}}</h5>
     <p-inputSwitch [(ngModel)]="showTotalShares" (ngModelChange)="showTotalSharesChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
 </div>
 <div class="card">
-    <h5>Network Difficulty Card</h5>
+    <h5>{{'network_difficulty_card' | translate}}</h5>
     <p-inputSwitch [(ngModel)]="showNetworkDifficulty" (ngModelChange)="showNetworkDifficultyChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
 </div>
 <div class="card">
-    <h5>Network Hashrate Card</h5>
+    <h5>{{'network_hashrate_card' | translate}}</h5>
     <p-inputSwitch [(ngModel)]="showNetworkHashrate" (ngModelChange)="showNetworkHashrateChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
 </div>
 <div class="card">
-    <h5>Block Height Card</h5>
+    <h5>{{'block_height_card' | translate}}</h5>
     <p-inputSwitch [(ngModel)]="showBlockHeight" (ngModelChange)="showBlockHeightChanged($event)" optionLabel="label"
         optionValue="value"></p-inputSwitch>
 </div>

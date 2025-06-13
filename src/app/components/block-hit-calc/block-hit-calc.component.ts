@@ -67,10 +67,10 @@ export class BlockHitCalcComponent implements OnInit, OnDestroy {
     const blockTime = (this.difficulty * hashesPerDifficulty) / hashrate; // seconds
 
     const periods = [
-      { label: 'Day', seconds: 86400 },
-      { label: 'Week', seconds: 86400 * 7 },
-      { label: 'Month', seconds: 86400 * 30 },
-      { label: 'Year', seconds: 86400 * 365 }
+      { label: 'day', seconds: 86400 },
+      { label: 'week', seconds: 86400 * 7 },
+      { label: 'month', seconds: 86400 * 30 },
+      { label: 'year', seconds: 86400 * 365 }
     ];
 
     return periods.map(p => ({

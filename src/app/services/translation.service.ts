@@ -51,6 +51,39 @@ export class TranslationService {
       home_join_matrix: 'Join our Matrix Room:',
       home_ntfy_alerts: 'Or get notified via ntfy:',
       home_blocktemplates: 'We provide new blocktemplates every 30s!'
+      ,sessions: 'Sessions'
+      ,next_difficulty_adj: 'Next Difficulty Adjustment'
+      ,estimated_halving: 'Estimated time until next halving'
+      ,blocks_remaining: 'Blocks Remaining:'
+      ,eta: 'ETA:'
+      ,estimated_next_blockreward: 'Estimated Next Blockreward'
+      ,nextblock_label: 'Nextblock:'
+      ,nextblock_hint: 'next confirmed block in the mempool'
+      ,estimate_label: 'Estimate:'
+      ,btc_price_label: 'BTC Price:'
+      ,reward_value_label: 'Reward Value:'
+      ,last_block_reward: 'Last Block Reward'
+      ,block_reward_label: 'Block Reward:'
+      ,block_hit_chance: 'Block Hit Chance (1d Avg Hashrate)'
+      ,custom_hashrate: 'Custom Hashrate'
+      ,enter_hashrate: 'Enter hashrate in'
+      ,hashrate_placeholder: 'Hashrate (TH/s)'
+      ,btc_addresses: 'BTC Addresses'
+      ,new_address: 'New address'
+      ,add_btn: 'Add'
+      ,current_btn: 'Current'
+      ,switch_btn: 'Switch'
+      ,background_particles: 'Background Particles'
+      ,your_best_difficulty_card: 'Your Best Difficulty Card'
+      ,total_shares_card: 'Total Shares Card'
+      ,network_difficulty_card: 'Network Difficulty Card'
+      ,network_hashrate_card: 'Network Hashrate Card'
+      ,block_height_card: 'Block Height Card'
+      ,day: 'Day'
+      ,week: 'Week'
+      ,month: 'Month'
+      ,year: 'Year'
+      ,days_word: 'days'
     },
     de: {
       login_title: 'Anmelden',
@@ -93,6 +126,39 @@ export class TranslationService {
       home_join_matrix: 'Tritt unserem Matrix-Raum bei:',
       home_ntfy_alerts: 'Oder über ntfy benachrichtigen lassen:',
       home_blocktemplates: 'Wir stellen alle 30 Sekunden neue Blocktemplates bereit!'
+      ,sessions: 'Sitzungen'
+      ,next_difficulty_adj: 'Nächste Schwierigkeitsanpassung'
+      ,estimated_halving: 'Geschätzte Zeit bis zum nächsten Halving'
+      ,blocks_remaining: 'Verbleibende Blöcke:'
+      ,eta: 'Prognose:'
+      ,estimated_next_blockreward: 'Geschätzte nächste Blockbelohnung'
+      ,nextblock_label: 'Nächster Block:'
+      ,nextblock_hint: 'nächster bestätigter Block im Mempool'
+      ,estimate_label: 'Schätzung:'
+      ,btc_price_label: 'BTC-Preis:'
+      ,reward_value_label: 'Belohnungswert:'
+      ,last_block_reward: 'Letzte Blockbelohnung'
+      ,block_reward_label: 'Blockbelohnung:'
+      ,block_hit_chance: 'Blocktreffer-Wahrscheinlichkeit (1T Durchschnitts-Hashrate)'
+      ,custom_hashrate: 'Eigene Hashrate'
+      ,enter_hashrate: 'Hashrate eingeben in'
+      ,hashrate_placeholder: 'Hashrate (TH/s)'
+      ,btc_addresses: 'BTC-Adressen'
+      ,new_address: 'Neue Adresse'
+      ,add_btn: 'Hinzufügen'
+      ,current_btn: 'Aktuell'
+      ,switch_btn: 'Wechseln'
+      ,background_particles: 'Hintergrundpartikel'
+      ,your_best_difficulty_card: 'Karte Beste Schwierigkeit'
+      ,total_shares_card: 'Karte Gesamte Shares'
+      ,network_difficulty_card: 'Karte Netzwerkschwierigkeit'
+      ,network_hashrate_card: 'Karte Netzwerk-Hashrate'
+      ,block_height_card: 'Karte Blockhöhe'
+      ,day: 'Tag'
+      ,week: 'Woche'
+      ,month: 'Monat'
+      ,year: 'Jahr'
+      ,days_word: 'Tage'
     }
   };
 
@@ -103,6 +169,15 @@ export class TranslationService {
   public setLanguage(lang: string): void {
     localStorage.setItem(this.LANGUAGE_KEY, lang);
     this._language$.next(lang);
+  }
+
+  public toggleLanguage(): void {
+    const next = this._language$.value === 'en' ? 'de' : 'en';
+    this.setLanguage(next);
+  }
+
+  public get currentLanguage(): string {
+    return this._language$.value;
   }
 
   public translate(key: string): string {

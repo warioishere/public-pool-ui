@@ -1,7 +1,9 @@
 <div class="py-4 px-1 md:px4 lg:px-8 mx-0 lg:mx-8 main">
     <div class="grid justify-content-center">
         <div class="col-12 text-right mb-2">
-            <button pButton label="Deutsch" (click)="translation.setLanguage('de')"></button>
+            <button pButton
+                    [label]="(translation.language$ | async) === 'en' ? 'Deutsch' : 'English'"
+                    (click)="translation.toggleLanguage()"></button>
         </div>
 
         <div class="col-12">

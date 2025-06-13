@@ -1,20 +1,20 @@
 <div class="grid justify-content-center">
   <div class="col-12 md:col-6">
     <div class="card text-center">
-      <h4>Estimated Next Blockreward</h4>
-      <p><strong>Nextblock:</strong> next confirmed block in the mempool</p>
-      <p><strong>Estimate:</strong> <span>{{ estimatedReward }}</span> sats</p>
-      <p><strong>BTC Price:</strong> ${{ priceUSD }} / €{{ priceEUR }} / CHF {{ priceCHF }}</p>
-      <p><strong>Reward Value:</strong> ${{ estRewardUSD | number:'1.2-2' }} / €{{ estRewardEUR | number:'1.2-2' }} / CHF {{ estRewardCHF | number:'1.2-2' }}</p>
+      <h4>{{'estimated_next_blockreward' | translate}}</h4>
+      <p><strong>{{'nextblock_label' | translate}}</strong> {{'nextblock_hint' | translate}}</p>
+      <p><strong>{{'estimate_label' | translate}}</strong> <span>{{ estimatedReward }}</span> sats</p>
+      <p><strong>{{'btc_price_label' | translate}}</strong> ${{ priceUSD }} / €{{ priceEUR }} / CHF {{ priceCHF }}</p>
+      <p><strong>{{'reward_value_label' | translate}}</strong> ${{ estRewardUSD | number:'1.2-2' }} / €{{ estRewardEUR | number:'1.2-2' }} / CHF {{ estRewardCHF | number:'1.2-2' }}</p>
     </div>
   </div>
   <div class="col-12 md:col-6">
     <div class="card text-center">
-      <h4>Last Block Reward</h4>
-      <p><strong>Block Height:</strong> <span>{{ blockHeight }}</span></p>
-      <p><strong>Block Reward:</strong> <span>{{ avgRewards }}</span> sats</p>
-      <p><strong>BTC Price:</strong> ${{ priceUSD }} / €{{ priceEUR }} / CHF {{ priceCHF }}</p>
-      <p><strong>Reward Value:</strong> ${{ rewardUSD | number:'1.2-2' }} / €{{ rewardEUR | number:'1.2-2' }} / CHF {{ rewardCHF | number:'1.2-2' }}</p>
+      <h4>{{'last_block_reward' | translate}}</h4>
+      <p><strong>{{'block_height' | translate}}</strong> <span>{{ blockHeight }}</span></p>
+      <p><strong>{{'block_reward_label' | translate}}</strong> <span>{{ avgRewards }}</span> sats</p>
+      <p><strong>{{'btc_price_label' | translate}}</strong> ${{ priceUSD }} / €{{ priceEUR }} / CHF {{ priceCHF }}</p>
+      <p><strong>{{'reward_value_label' | translate}}</strong> ${{ rewardUSD | number:'1.2-2' }} / €{{ rewardEUR | number:'1.2-2' }} / CHF {{ rewardCHF | number:'1.2-2' }}</p>
     </div>
   </div>
 </div>

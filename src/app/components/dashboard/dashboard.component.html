@@ -1,7 +1,9 @@
 <ng-container>
     <div class="grid">
         <div class="col-12 text-right mb-2">
-            <button pButton label="Deutsch" (click)="translation.setLanguage('de')"></button>
+            <button pButton
+                    [label]="(translation.language$ | async) === 'en' ? 'Deutsch' : 'English'"
+                    (click)="translation.toggleLanguage()"></button>
         </div>
         <div class="col-12 lg:col-6 xl:col-3" *ngIf="showBestDifficulty$ | async">
 
@@ -163,7 +165,7 @@
 
                         </td>
                         <td>
-                            {{getSessionCount(worker.name, clientInfo.workers)}} Sessions
+                            {{getSessionCount(worker.name, clientInfo.workers)}} {{'sessions' | translate}}
                         </td>
                         <td>
                             {{getTotalHashRate(worker.name, clientInfo.workers) | hashSuffix}}

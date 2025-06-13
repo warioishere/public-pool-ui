@@ -1,20 +1,20 @@
 <div class="grid justify-content-center">
   <div class="col-12 md:col-6">
     <div class="card text-center">
-      <h4>Next Difficulty Adjustment</h4>
-      <p><strong>Current Network Difficulty:</strong> <span>{{ currentDifficulty }}</span>T</p>
-      <p><strong>Current Hashrate:</strong> <span>{{ currentHashrate | hashSuffix }}</span></p>
-      <p><strong>Difficulty Change:</strong> <span>{{ difficultyChange }}</span>%</p>
-      <p><strong>Days Until Adjustment:</strong> <span>{{ estimatedDaysUntilAdjustment }}</span> days</p>
+      <h4>{{'next_difficulty_adj' | translate}}</h4>
+      <p><strong>{{'current_network_difficulty' | translate}}</strong> <span>{{ currentDifficulty }}</span>T</p>
+      <p><strong>{{'current_hashrate' | translate}}</strong> <span>{{ currentHashrate | hashSuffix }}</span></p>
+      <p><strong>{{'difficulty_change' | translate}}</strong> <span>{{ difficultyChange }}</span>%</p>
+      <p><strong>{{'days_until_adjustment' | translate}}</strong> <span>{{ estimatedDaysUntilAdjustment }}</span> {{'days_word' | translate}}</p>
     </div>
   </div>
 </div>
 <div class="grid justify-content-center mt-3">
   <div class="col-12 md:col-6">
     <div class="card text-center">
-      <h4>Estimated time until next halving</h4>
-      <p><strong>Blocks Remaining:</strong> <span>{{ halvingBlocksRemaining }}</span></p>
-      <p><strong>ETA:</strong> <span>{{ halvingEta }}</span></p>
+      <h4>{{'estimated_halving' | translate}}</h4>
+      <p><strong>{{'blocks_remaining' | translate}}</strong> <span>{{ halvingBlocksRemaining }}</span></p>
+      <p><strong>{{'eta' | translate}}</strong> <span>{{ halvingEta }}</span></p>
     </div>
   </div>
 </div>
